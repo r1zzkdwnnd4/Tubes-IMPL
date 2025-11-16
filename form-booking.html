@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Booking</title>
+    <link rel="stylesheet" href="form-booking.html">
+    
+</head>
+<body>
+
+    
+
+    <div class="banner"></div>
+
+    <div class="booking-form">
+        <h3>Online Booking</h3>
+        <form>
+            <div class="row">
+                <div class="col">
+                    <label>Nama Lengkap</label>
+                    <input type="text" placeholder="Masukkan Nama Lengkap" required>
+                </div>
+                <div class="col">
+                    <label>Email</label>
+                    <input type="email" placeholder="Masukkan Email" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>No Telepon</label>
+                    <input type="number" placeholder="Masukkan No Telepon" required>
+                </div>
+                <div class="col">
+                    <label>Destinasi (Harga per Orang)</label>
+                    <select>
+                        <option disabled selected>Pilih Destinasi</option>
+                        <option>Destinasi 1</option>
+                        <option>Destinasi 2</option>
+                        <option>Destinasi 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Jumlah Orang</label>
+                    <input type="number" placeholder="Masukkan Jumlah Orang" required>
+                </div>
+                <div class="col">
+                    <label>Metode Pembayaran</label>
+                    <select>
+                        <option disabled selected>Pilh Metode Pembayaran</option>
+                        <option>Kartu Kredit</option>
+                        <option>Paypal</option>
+                        <option>Transfer bank</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Tanggal Travel</label>
+                    <input type="date" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">Lanjutkan ke Pembayaran</button>
+        </form>
+    </div>
+
+</body>
+</html>
