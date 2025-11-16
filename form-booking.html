@@ -66,5 +66,24 @@
         </form>
     </div>
 
+    <script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+
+        localStorage.setItem('nama', form[0].value);
+        localStorage.setItem('email', form[1].value);
+        localStorage.setItem('telp', form[2].value);
+        localStorage.setItem('destinasi', form[3].value);
+        localStorage.setItem('jumlah', form[4].value);
+        localStorage.setItem('metode', form[5].value);
+        localStorage.setItem('tanggal', form[6].value);
+
+        window.location.href = 'payment.html';
+    });
+</script>
+
 </body>
 </html>
+
