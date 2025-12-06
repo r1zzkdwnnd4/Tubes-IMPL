@@ -18,7 +18,7 @@ class CustomerAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($credentials)) {
-            return redirect()->route('customer.dashboard'); //ganti ke halaman home customer
+            return redirect()->route('home'); //ganti ke halaman home customer
         }
 
         return back()->with('error', 'Email atau password salah');
