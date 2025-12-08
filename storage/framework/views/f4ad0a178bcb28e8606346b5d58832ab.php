@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse justify-content-end me-4">
         <ul class="navbar-nav">
             <li class="nav-item me-3">
-                <a class="btn btn-sign-in" href="<?php echo e(route('login')); ?>">Sign In</a>
+                <a class="btn btn-sign-in" href="<?php echo e(route('customer.login')); ?>">Sign In</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-sign-up" href="<?php echo e(route('register')); ?>">Sign Up</a>
+                <a class="btn btn-sign-up" href="<?php echo e(route('customer.register')); ?>">Sign Up</a>
             </li>
         </ul>
     </div>
@@ -29,7 +29,7 @@
         <p>Belum punya akun? <span class="text-muted">Buat</span></p>
         <h1>Login</h1>
 
-        <form method="POST" action="<?php echo e(route('login.process')); ?>">
+        <form method="POST" action="<?php echo e(route('customer.login.process')); ?>">
             <?php echo csrf_field(); ?>
 
             <div class="input-group mb-4">
@@ -54,4 +54,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/login.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travela\resources\views/pages/login.blade.php ENDPATH**/ ?>

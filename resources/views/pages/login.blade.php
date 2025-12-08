@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse justify-content-end me-4">
         <ul class="navbar-nav">
             <li class="nav-item me-3">
-                <a class="btn btn-sign-in" href="{{ route('login') }}">Sign In</a>
+                <a class="btn btn-sign-in" href="{{ route('customer.login') }}">Sign In</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-sign-up" href="{{ route('register') }}">Sign Up</a>
+                <a class="btn btn-sign-up" href="{{ route('customer.register') }}">Sign Up</a>
             </li>
         </ul>
     </div>
@@ -29,7 +29,7 @@
         <p>Belum punya akun? <span class="text-muted">Buat</span></p>
         <h1>Login</h1>
 
-        <form method="POST" action="{{ route('login.process') }}">
+        <form method="POST" action="{{ route('customer.login.process') }}">
             @csrf
 
             <div class="input-group mb-4">

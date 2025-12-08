@@ -1,41 +1,48 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
 
-// ======================
-// ROUTE PUBLIC
-// ======================
-
 Route::view('/', 'pages.home')->name('home');
-Route::view('/login', 'pages.login')->name('login');
-Route::view('/register', 'pages.register')->name('register');
-Route::view('/form-booking', 'pages.form-booking')->name('form.booking');
-Route::view('/payment', 'pages.payment')->name('payment');
-Route::view('/konfirmasi-pembayaran', 'pages.konfirmasi-pembayaran')->name('payment.confirm');
-Route::view('/tiket', 'pages.tiket')->name('ticket');
 
+// -----------------------
+// CUSTOMER AUTH
+// -----------------------
+Route::get('/customer/register', [CustomerAuthController::class, 'showRegister'])
+    ->name('customer.register');
 
-use App\Http\Controllers\Auth\PublicAuthController;
+Route::post('/customer/register', [CustomerAuthController::class, 'register'])
+    ->name('customer.register.process');
 
-Route::post('/login', [PublicAuthController::class, 'login'])->name('login.process');
+Route::get('/customer/login', [CustomerAuthController::class, 'showLogin'])
+    ->name('customer.login');
 
-// ======================
-// ROUTE ADMIN
-// ======================
+Route::post('/customer/login', [CustomerAuthController::class, 'login'])
+    ->name('customer.login.process');
+
+Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
+    ->name('customer.logout');
+
+Route::get('/customer/home', fn() => view('pages.customerHome'))
+    ->name('customer.home')
+    ->middleware('auth:customer');
+
+// -----------------------
+// ADMIN AUTH
+// -----------------------
 Route::prefix('admin')->group(function () {
 
-    // Login Admin (TANPA middleware admin)
-    Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.process');
+    Route::get('/login', [AdminAuthController::class, 'showLogin'])
+        ->name('admin.login');
 
-    // Semua halaman admin yang BUTUH login admin
+    Route::post('/login', [AdminAuthController::class, 'login'])
+        ->name('admin.login.process');
+
     Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', fn() => view('pages.adminDashboard'))
+            ->name('admin.dashboard');
 
-        Route::get('/dashboard', function () {
-            return view('pages.adminDashboard'); 
-        })->name('admin.dashboard');
-
-        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+        Route::post('/logout', [AdminAuthController::class, 'logout'])
+            ->name('admin.logout');
     });
 });
