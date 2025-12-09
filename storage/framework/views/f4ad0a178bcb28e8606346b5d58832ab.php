@@ -6,7 +6,7 @@
     <title>Travela - Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo e(asset('css/register.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('styles/register.css')); ?>">
 </head>
 <body>
 

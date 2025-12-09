@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'Customer';
     protected $primaryKey = 'Id_cust';
     public $timestamps = false;
@@ -17,6 +20,10 @@ class Customer extends Model
         'Alamat',
         'NoHP'
     ];
+
+    // because DB column is "Password", not "password"
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
 }
-
-

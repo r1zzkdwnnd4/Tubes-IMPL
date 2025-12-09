@@ -27,6 +27,9 @@ Route::get('/customer/home', fn() => view('pages.customerHome'))
     ->name('customer.home')
     ->middleware('auth:customer');
 
+Route::view('/form-booking', 'pages.form-booking')->name('form.booking');
+
+
 // -----------------------
 // ADMIN AUTH
 // -----------------------

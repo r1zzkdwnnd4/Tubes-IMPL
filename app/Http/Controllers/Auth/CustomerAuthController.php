@@ -45,13 +45,13 @@ class CustomerAuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'Email' => 'required|email',
-            'Password' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $credentials = [
-            'Email' => $request->Email,
-            'Password' => $request->Password,
+            'Email' => $request->email,       // field DB
+            'password' => $request->password  // input form
         ];
 
         if (Auth::guard('customer')->attempt($credentials)) {
@@ -60,6 +60,7 @@ class CustomerAuthController extends Controller
 
         return back()->with('error', 'Email atau password salah.');
     }
+
 
     public function logout()
     {
