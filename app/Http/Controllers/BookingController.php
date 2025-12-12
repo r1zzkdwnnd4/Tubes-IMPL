@@ -3,62 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Booking;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Menampilkan form booking
+    public function formBooking()
     {
-        //
+        return view('form-booking');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Memproses booking
     public function store(Request $request)
     {
-        //
-    }
+        // Validasi form
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'email' => 'required|email',
+            'telepon' => 'required|string|max:20',
+            'destinasi' => 'required|string',
+            'jumlah_orang' => 'required|integer|min:1',
+            'metode_pembayaran' => 'required|string',
+            'tanggal_travel' => 'required|date',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // Simpan ke database
+        $booking = Booking::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'telepon' => $request->telepon,
+            'destinasi' => $request->destinasi,
+            'jumlah_orang' => $request->jumlah_orang,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'tanggal_travel' => $request->tanggal_travel,
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Redirect ke halaman pembayaran
+        return redirect()->route('payment', ['id' => $booking->id])
+                        ->with('success', 'Booking berhasil! Silakan lanjut ke pembayaran.');
     }
 }
