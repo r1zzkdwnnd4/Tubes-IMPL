@@ -4,30 +4,32 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('Customer')->insert([
             [
-                'NamaCus' => 'Budi Santoso',
-                'Email' => 'budi@example.com',
-                'Alamat' => 'Jakarta',
-                'NoHP' => '08123456789'
+                'NamaCustomer' => 'Budi Santoso',
+                'Email'        => 'budi@gmail.com',
+                'Password'     => Hash::make('budi123'),
+                'NoHP'         => '08123456789',
             ],
             [
-                'NamaCus' => 'Siti Aminah',
-                'Email' => 'siti@example.com',
-                'Alamat' => 'Surabaya',
-                'NoHP' => '082233445566'
+                'NamaCustomer' => 'Siti Aminah',
+                'Email'        => 'siti@gmail.com',
+                'Password'     => Hash::make('siti123'),
+                'NoHP'         => '08123456788',
             ],
             [
-                'NamaCus' => 'Rian Hidayat',
-                'Email' => 'rian@example.com',
-                'Alamat' => 'Bandung',
-                'NoHP' => '08177889900'
-            ]
+                'NamaCustomer' => 'Ahmad Rizki',
+                'Email'        => 'rizki@gmail.com',
+                'Password'     => Hash::make('rizki123'),
+                'NoHP'         => '08123456787',
+            ],
         ]);
+
     }
 }

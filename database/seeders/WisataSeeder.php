@@ -7,24 +7,35 @@ use Illuminate\Support\Facades\DB;
 
 class WisataSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('Wisata')->insert([
             [
-                'NamaWisata' => 'Pantai Kuta',
-                'Lokasi' => 'Kuta',
-                'Harga' => 150000
+                'NamaWisata' => 'Paket Bali 3D2N',
+                'Area'       => 'Bali',
+                'Harga'      => 4500000,
             ],
             [
-                'NamaWisata' => 'Tanah Lot',
-                'Lokasi' => 'Tabanan',
-                'Harga' => 200000
+                'NamaWisata' => 'Raja Ampat 5D4N',
+                'Area'       => 'Papua Barat',
+                'Harga'      => 12000000,
             ],
             [
-                'NamaWisata' => 'Ubud Monkey Forest',
-                'Lokasi' => 'Ubud',
-                'Harga' => 180000
-            ]
+                'NamaWisata' => 'Yogyakarta Cultural',
+                'Area'       => 'Yogyakarta',
+                'Harga'      => 2800000,
+            ],
+            [
+                'NamaWisata' => 'Lombok Paradise',
+                'Area'       => 'Lombok',
+                'Harga'      => 5200000,
+            ],
+            [
+                'NamaWisata' => 'Bromo Sunrise',
+                'Area'       => 'Jawa Timur',
+                'Harga'      => 1800000,
+            ],
         ]);
+
     }
 }
