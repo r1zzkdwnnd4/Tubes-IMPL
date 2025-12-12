@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AgenAuthController;
@@ -45,6 +46,29 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 });
 
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/manajemen-wisata', function () {
+        return view('pages.adminManajemenWisata');
+    })->name('admin.wisata');
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/manajemen-customer', function () {
+        return view('pages.adminManajemenCustomer');
+    })->name('admin.customer');
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/manajemen-agen', function () {
+        return view('pages.adminManajemenAgen');
+    })->name('admin.agen');
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/manajemen-transaksi', function () {
+        return view('pages.adminHistoryTransaksi');
+    })->name('admin.transaksi');
+});
 
 // ---------------------
 // AGEN
