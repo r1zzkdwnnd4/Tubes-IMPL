@@ -44,7 +44,7 @@
 
                     <!-- FORM CREATE -->
 
-                    <form id="addForm"> <!-- masukin action dan method disini -->
+                    <form method="POST" action="{{ route('admin.customers.store') }}"> <!-- masukin action dan method disini -->
                         @csrf
 
                         <!-- NAMA AGEN -->
@@ -150,9 +150,10 @@
             <h2 class="text-xl font-bold mb-4">Edit Data Agen</h2>
 
             <!-- FORM EDIT (tinggal sambungkan ke route update) -->
-            <form id="editForm" method="POST" enctype="multipart/form-data">
+            <form id="editForm" method="POST">
                 @csrf
                 @method('PUT')
+
 
                 <!-- NAMA AGEN -->
                 <div class="mb-3">

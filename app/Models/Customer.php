@@ -14,14 +14,13 @@ class Customer extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'NamaCus',
+        'NamaCustomer',
         'Email',
         'Password',
-        'Alamat',
         'NoHP'
     ];
 
-    // because DB column is "Password", not "password"
+    // karena kolom password di DB pakai "Password"
     public function getAuthPassword()
     {
         return $this->Password;

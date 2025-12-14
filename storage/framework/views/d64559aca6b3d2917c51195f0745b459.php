@@ -24,75 +24,20 @@
                     <p class="text-gray-500">Kelola customer yang terdaftar</p>
                 </div>
 
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700" onclick="openAddModal()">
+                <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                        onclick="openAddModal()">
                     + Tambah Customer
                 </button>
             </div>
 
-            <!-- MODAL TAMBAH WISATA -->
-            <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-                <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
-
-                    <!-- Tombol Close -->
-                    <button onclick="closeAddModal()" class="absolute top-3 right-3 text-gray-500 hover:text-black">
-                        ✖
-                    </button>
-
-                    <h2 class="text-xl font-bold mb-4">Tambah Customer</h2>
-
-                    <!-- FORM CREATE -->
-
-                    <form id="addForm"> <!-- masukin action dan method disini -->
-                        <?php echo csrf_field(); ?>
-
-                        <!-- NAMA CUSTOMER -->
-                        <div class="mb-3">
-                            <label class="font-semibold">Nama Customer</label>
-                            <input type="text" name="nama_customer"
-                                class="w-full mt-1 px-3 py-2 border rounded-lg">
-                        </div>
-
-                        <!-- EMAIL -->
-                        <div class="mb-3">
-                            <label class="font-semibold">email</label>
-                            <input type="text" name="email"
-                                class="w-full mt-1 px-3 py-2 border rounded-lg">
-                        </div>
-
-                        <!-- Password -->
-                        <div class="mb-3">
-                            <label class="font-semibold">Password</label>
-                            <input type="password" name="password"
-                                class="w-full mt-1 px-3 py-2 border rounded-lg">
-                        </div>
-
-                        <!-- SUBMIT -->
-                        <button type="submit"
-                            class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                            Tambah Customer
-                        </button>
-                    </form>
-                </div>
-            </div>
-
             <!-- SEARCH WRAPPER-->
             <div class="mb-6 p-4 bg-white border rounded-xl shadow-sm">
-
-                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-
-                    <!-- SEARCH BAR -->
-                    <div>
-                        <label class="text-sm text-black">Cari Customer</label>
-                        <input type="text" placeholder="Cari customer..."
-                            class="w-full p-3 border border-black/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
-                    </div>
-
-
-                </div>
+                <label class="text-sm text-black">Cari Customer</label>
+                <input type="text" placeholder="Cari customer..."
+                    class="w-full p-3 border border-black/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300">
             </div>
 
             <!-- CUSTOMER TABLE -->
-
             <div class="rounded-xl shadow mb-10 overflow-hidden border border-gray-300">
                 <table class="w-full border-collapse">
 
@@ -108,7 +53,44 @@
                     </thead>
 
                     <!-- BODY -->
-                    <tbody id="wisataTable" class="bg-white text-black">
+                    <tbody class="bg-white text-black">
+                        <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cust): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="p-3"><?php echo e($cust->Id_cust); ?></td>
+                                <td class="p-3"><?php echo e($cust->NamaCustomer); ?></td>
+                                <td class="p-3"><?php echo e($cust->Email); ?></td>
+                                <td class="p-3"><?php echo e($cust->NoHP); ?></td>
+
+                                <td class="p-3 text-center flex items-center gap-3 justify-center">
+
+                                    <!-- BUTTON EDIT -->
+                                    <button
+                                        onclick="openEditModal(
+                                            '<?php echo e($cust->Id_cust); ?>',
+                                            '<?php echo e($cust->NamaCustomer); ?>',
+                                            '<?php echo e($cust->Email); ?>',
+                                            '<?php echo e($cust->NoHP); ?>',
+                                            '<?php echo e(route('admin.customer.update', $cust->Id_cust)); ?>'
+                                        )"
+                                        class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                        Edit
+                                    </button>
+
+                                    <!-- DELETE -->
+                                    <form action="<?php echo e(route('admin.customer.delete', $cust->Id_cust)); ?>"
+                                          method="POST"
+                                          onsubmit="return confirm('Yakin ingin menghapus?')">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
+
+                                        <button class="px-3 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                                            Hapus
+                                        </button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
 
                 </table>
@@ -118,50 +100,83 @@
         </main>
     </div>
 
-    <!-- Modal Edit -->
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <!-- MODAL TAMBAH CUSTOMER -->
+    <div id="addModal"
+         class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
-            <!-- Tombol Close -->
-            <button onclick="closeEditModal()" class="absolute top-3 right-3 text-gray-500 hover:text-black">
-                ✖
-            </button>
+            <button onclick="closeAddModal()" class="absolute top-3 right-3 text-gray-500 hover:text-black"> ✖ </button>
 
-            <h2 class="text-xl font-bold mb-4">Edit Data Customer</h2>
+            <h2 class="text-xl font-bold mb-4">Tambah Customer</h2>
 
-            <!-- FORM EDIT (tinggal sambungkan ke route update) -->
-            <form id="editForm" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo e(route('admin.customer.store')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
+
+                <div class="mb-3">
+                    <label class="font-semibold">Nama Customer</label>
+                    <input type="text" name="nama_customer"
+                           class="w-full px-3 py-2 border rounded-lg">
+                </div>
+
+                <div class="mb-3">
+                    <label class="font-semibold">Email</label>
+                    <input type="email" name="email"
+                           class="w-full px-3 py-2 border rounded-lg">
+                </div>
+
+                <div class="mb-3">
+                    <label class="font-semibold">Password</label>
+                    <input type="password" name="password"
+                           class="w-full px-3 py-2 border rounded-lg">
+                </div>
+
+                <div class="mb-3">
+                    <label class="font-semibold">No HP</label>
+                    <input type="text" name="no_hp"
+                           class="w-full px-3 py-2 border rounded-lg">
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                    Tambah Customer
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT CUSTOMER -->
+    <div id="editModal"
+         class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
+
+            <button onclick="closeEditModal()" class="absolute top-3 right-3 text-gray-500 hover:text-black"> ✖ </button>
+
+            <h2 class="text-xl font-bold mb-4">Edit Customer</h2>
+
+            <form id="editForm" method="POST">
                 <?php echo csrf_field(); ?>
                 <?php echo method_field('PUT'); ?>
 
-                <!-- NAMA CUSTOMER -->
                 <div class="mb-3">
                     <label class="font-semibold">Nama Customer</label>
-                    <input type="text" name="nama_customer" id="edit_nama_customer"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg">
+                    <input type="text" id="edit_nama" name="nama_customer"
+                        class="w-full px-3 py-2 border rounded-lg">
                 </div>
 
-                <!-- EMAIL -->
                 <div class="mb-3">
                     <label class="font-semibold">Email</label>
-                    <input type="email" name="email" id="edit_email"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg">
+                    <input type="email" id="edit_email" name="Email"
+                        class="w-full px-3 py-2 border rounded-lg">
                 </div>
 
-                <!-- NO HP -->
                 <div class="mb-3">
                     <label class="font-semibold">No HP</label>
-                    <input type="text" name="no_hp" id="edit_no_hp"
-                        class="w-full mt-1 px-3 py-2 border rounded-lg">
+                    <input type="text" id="edit_nohp" name="no_hp"
+                        class="w-full px-3 py-2 border rounded-lg">
                 </div>
 
-
-
-
-
-                <!-- SUBMIT -->
                 <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 mt-3">
+                        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 mt-3">
                     Simpan Perubahan
                 </button>
             </form>
@@ -169,94 +184,32 @@
     </div>
 
     <script>
-        // DATA CUSTOMER DUMMY (bisa diganti fetch dari API backend)
-        const wisataList = [{
-                id: "CUST001",
-                nama: "Budi Santoso",
-                email: "budi@gmail.com",
-                nohp: "08123456789"
-            },
-            {
-                id: "CUST002",
-                nama: "Ani Pratiwi",
-                email: "ani@gmail.com",
-                nohp: "08123456788"
-            },
-            {
-                id: "CUST003",
-                nama: "Dedi Kurniawan",
-                email: "dedi@gmail.com",
-                nohp: "08123456787"
-            },
-            {
-                id: "CUST004",
-                nama: "Siti Nurhaliza",
-                email: "siti@gmail.com",
-                nohp: "08123456786"
-            },
-            {
-                id: "CUST005",
-                nama: "Rudi Hartono",
-                email: "rudi@gmail.com",
-                nohp: "08123456785"
-            },
-            {
-                id: "CUST006",
-                nama: "Lina Susanti",
-                email: "lina@gmail.com",
-                nohp: "08123456784"
-            },
-        ];
-
-
-
-        const tableBody = document.getElementById("wisataTable");
-
-        wisataList.forEach(w => {
-            tableBody.innerHTML += `
-        <tr class="border-b hover:bg-gray-50">
-            <td class="p-3">${w.id}</td>
-            <td class="p-3">${w.nama}</td>
-            <td class="p-3">${w.email}</td>
-            <td class="p-3">${w.nohp}</td>
-            <td class="p-3 text-center flex items-center gap-3 justify-center">
-                <button onclick="openEditModal()"class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                    Edit
-                </button>
-                <button class="text-red-600 hover:underline">delete</button>
-            </td>
-        </tr>`;
-        });
-
-        //script untuk buka popup menu edit data customer
-        function openEditModal(id, nama, email, nohp, updateUrl) {
-            document.getElementById('edit_nama_customer').value = nama;
-            document.getElementById('edit_email').value = email;
-            document.getElementById('edit_no_hp').value = nohp;
-
-            // Set action form ke URL update
-            document.getElementById('editForm').action = updateUrl;
-
-            document.getElementById('editModal').classList.remove('hidden');
-            document.getElementById('editModal').classList.add('flex');
-        }
-
-        function closeEditModal() {
-            document.getElementById('editModal').classList.add('hidden');
-        }
-
-
-        //script untuk buka popup menu tambah customer
         function openAddModal() {
-            document.getElementById('addModal').classList.remove('hidden');
-            document.getElementById('addModal').classList.add('flex');
+            document.getElementById('addModal').classList.remove('hidden')
+            document.getElementById('addModal').classList.add('flex')
         }
 
         function closeAddModal() {
-            document.getElementById('addModal').classList.add('hidden');
+            document.getElementById('addModal').classList.add('hidden')
+        }
+
+        function openEditModal(id, nama, email, nohp, url) {
+            document.getElementById('edit_nama').value = nama
+            document.getElementById('edit_email').value = email
+            document.getElementById('edit_nohp').value = nohp
+
+            document.getElementById('editForm').action = url
+
+            document.getElementById('editModal').classList.remove('hidden')
+            document.getElementById('editModal').classList.add('flex')
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden')
         }
     </script>
 
 </body>
 
-</html><?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/adminManajemenCustomer.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/adminManajemenCustomer.blade.php ENDPATH**/ ?>
