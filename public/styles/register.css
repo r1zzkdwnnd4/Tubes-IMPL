@@ -1,0 +1,131 @@
+/* style.css */
+
+/* Warna latar belakang abu-abu */
+body {
+    background-color: #A9A9A9; /* Warna abu-abu yang mendekati gambar */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling Navbar */
+.navbar {
+    background-color: transparent !important; /* Membuat navbar transparan */
+}
+.navbar-brand {
+    color: #ffffff !important; /* Warna teks Travela (hitam) */
+    font-weight: bold;
+}
+.btn-sign-in {
+    background-color: #D3D3D3; /* Warna abu-abu muda untuk Sign In */
+    color: #212529; /* Warna teks hitam */
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+.btn-sign-up {
+    background-color: #F0F0F0; /* Warna abu-abu sangat muda untuk Sign Up */
+    color: #212529; /* Warna teks hitam */
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Styling Konten Tengah */
+.register-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.register-box {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+.register-box h1 {
+    color: #212529; /* Warna teks hitam */
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.register-box p {
+    color: #212529; /* Warna teks hitam */
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+.register-box .text-muted {
+    color: #212529 !important; /* Warna teks "Masuk" */
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Styling Input Field yang Direvisi */
+.form-control {
+    background-color: #D3D3D3;
+    border: none;
+    
+    /* PENTING: Radius diterapkan pada SEMUA sudut */
+    border-radius: 20px !important; 
+    
+    /* ... properti lainnya ... */
+    padding: 10px 15px 10px 40px; 
+    height: 50px;
+    color: #212529;
+    font-size: 1rem;
+    position: relative; 
+    transition: all 0.2s ease-in-out; 
+}
+.form-control::placeholder {
+    color: #696969;
+}
+.form-control:focus {
+    /* Pastikan border dan box-shadow bootstrap dimatikan */
+    box-shadow: none; 
+    background-color: #C0C0C0; /* Sedikit lebih gelap saat fokus */
+}
+
+/* Styling Ikon (Input Group Text) */
+.input-group-text {
+    /* Pastikan background transparan agar tidak menutupi radius */
+    background-color: transparent; 
+    border: none;
+    color: #696969; 
+    
+    /* ... properti lainnya ... */
+    position: absolute;
+    left: 0;
+    z-index: 5; 
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    padding-left: 10px; 
+}
+
+/* Hapus CSS Bootstrap yang tidak perlu, lalu rapikan HTML */
+.input-group {
+    position: relative; /* Penting untuk mengontainer posisi ikon absolut */
+}
+
+
+/* Styling Tombol Daftar */
+.btn-daftar {
+    background-color: #F0F0F0; /* Warna abu-abu sangat muda */
+    color: #212529; /* Warna teks hitam */
+    border: none;
+    padding: 15px 0;
+    border-radius: 20px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.2s;
+}
+.btn-daftar:hover {
+    background-color: #E0E0E0; /* Sedikit lebih gelap saat di-hover */
+    color: #212529;
+}
