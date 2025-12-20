@@ -28,6 +28,17 @@
                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
                 Book Now
             </a>
+            <?php if(auth()->guard('customer')->check()): ?>
+            <form method="POST" action="<?php echo e(route('customer.logout')); ?>">
+                <?php echo csrf_field(); ?>
+                <button
+                    type="submit"
+                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md"
+                >
+                    Logout
+                </button>
+            </form>
+            <?php endif; ?>
 
         </div>
 

@@ -44,8 +44,8 @@
             @csrf
 
             <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" name="NamaCus" class="form-control" placeholder="Username">
+                <label class="form-label">Nama</label>
+                <input type="text" name="NamaCus" class="form-control" placeholder="Nama Lengkap">
             </div>
 
             <div class="mb-3">

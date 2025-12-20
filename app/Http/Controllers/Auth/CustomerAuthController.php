@@ -26,12 +26,13 @@ class CustomerAuthController extends Controller
         ]);
 
         Customer::create([
-            'NamaCus'  => $request->NamaCus,
-            'Email'    => $request->Email,
-            'Password' => Hash::make($request->Password),
-            'Alamat'   => $request->Alamat,
-            'NoHP'     => $request->NoHP,
+            'NamaCustomer' => $request->NamaCus,
+            'Email'        => $request->Email,
+            'Password'     => Hash::make($request->Password),
+            'Alamat'       => $request->Alamat,
+            'NoHP'         => $request->NoHP,
         ]);
+
 
         return redirect()->route('customer.login')
             ->with('success', 'Registrasi berhasil, silakan login.');
