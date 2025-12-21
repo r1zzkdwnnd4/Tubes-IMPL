@@ -30,6 +30,9 @@ Route::get('/customer/home', fn() => view('pages.customerHome'))
 
 Route::view('/form-booking', 'pages.form-booking')->name('form.booking');
 
+Route::get('/payment', function () {
+    return view('pages.payment');
+});
 
 // -----------------------
 // ADMIN AUTH
@@ -69,4 +72,16 @@ Route::middleware('auth:agen')->group(function () {
 
 });
 
+
+// ---------------------
+// TicketController
+// ---------------------
+
+use App\Http\Controllers\Auth\TicketController;
+
+Route::get('/ticket/generate/{transactionId}', [TicketController::class, 'generate'])
+    ->name('ticket.generate');
+
+Route::get('/ticket/{id}', [TicketController::class, 'show'])
+    ->name('ticket.show');
 
