@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class MenawarkanSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('Menawarkan')->insert([
-            ['Id_agen' => 1, 'Id_cust' => 1],
-            ['Id_agen' => 2, 'Id_cust' => 2],
-            ['Id_agen' => 3, 'Id_cust' => 3],
+            [ 'Id_agen' => 1, 'Id_cust' => 1 ],
+            [ 'Id_agen' => 2, 'Id_cust' => 2 ],
+            [ 'Id_agen' => 3, 'Id_cust' => 3 ],
         ]);
     }
 }

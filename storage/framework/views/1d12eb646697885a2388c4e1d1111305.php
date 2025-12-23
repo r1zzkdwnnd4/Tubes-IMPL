@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travela - Registrasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('styles/register.css')); ?>">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-5">
-    <a class="navbar-brand ms-4" href="{{ route('home') }}"><h1>Travela</h1></a>
+    <a class="navbar-brand ms-4" href="<?php echo e(route('home')); ?>"><h1>Travela</h1></a>
     <div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item me-3">
-                <a class="btn btn-sign-in" href="{{ route('customer.login') }}">Sign In</a>
+                <a class="btn btn-sign-in" href="<?php echo e(route('customer.login')); ?>">Sign In</a>
             </li>
             <li class="nav-item">
-                <a class="btn btn-sign-up" href="{{ route('customer.register') }}">Sign Up</a>
+                <a class="btn btn-sign-up" href="<?php echo e(route('customer.register')); ?>">Sign Up</a>
             </li>
         </ul>
     </div>
@@ -26,22 +26,22 @@
 <div class="register-container">
     <div class="register-box">
 
-        <p>Sudah punya akun? <a href="{{ route('customer.login') }}" class="text-muted">Masuk</a></p>
+        <p>Sudah punya akun? <a href="<?php echo e(route('customer.login')); ?>" class="text-muted">Masuk</a></p>
         <h1>Registrasi</h1>
 
-        {{-- ERROR ALERT --}}
-        @if ($errors->any())
+        
+        <?php if($errors->any()): ?>
             <div class="alert alert-danger">
                 <ul class="mb-0">
-                    @foreach ($errors->all() as $err)
-                        <li>{{ $err }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $err): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($err); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
-        <form method="POST" action="{{ route('customer.register.process') }}">
-            @csrf
+        <form method="POST" action="<?php echo e(route('customer.register.process')); ?>">
+            <?php echo csrf_field(); ?>
 
             <div class="mb-3">
                 <label class="form-label">Username</label>
@@ -76,3 +76,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/pages/register.blade.php ENDPATH**/ ?>

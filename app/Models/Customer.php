@@ -14,7 +14,7 @@ class Customer extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'NamaCus',
+        'NamaCustomer',
         'Email',
         'Password',
         'Alamat',

@@ -8,21 +8,28 @@ use Illuminate\Support\Facades\Hash;
 
 class AgenSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('Agen')->insert([
             [
-                'Id_agen' => 1,
-                'Area'    => 'Bali Utara',
-                'Email'   => 'agen1@travela.com',
-                'Password'=> Hash::make('agen123'),
+                'NamaAgen' => 'Agen Bali',
+                'Area'     => 'Bali',
+                'Email'    => 'agen.bali@travela.com',
+                'Password' => Hash::make('bali123'),
             ],
             [
-                'Id_agen' => 2,
-                'Area'    => 'Bali Selatan',
-                'Email'   => 'agen2@travela.com',
-                'Password'=> Hash::make('agen456'),
+                'NamaAgen' => 'Agen Lombok',
+                'Area'     => 'Lombok',
+                'Email'    => 'agen.lombok@travela.com',
+                'Password' => Hash::make('lombok123'),
+            ],
+            [
+                'NamaAgen' => 'Agen Papua Barat',
+                'Area'     => 'Papua Barat',
+                'Email'    => 'agen.papua@travela.com',
+                'Password' => Hash::make('papua123'),
             ],
         ]);
+
     }
 }

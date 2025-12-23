@@ -37,19 +37,19 @@
 </head>
 <body class="bg-white">
     <h1 class="text-1xl font-semibold text-gray-800 mb-4 px-6">
-        Selamat datang, <span class="text-primary-blue">{{ auth('customer')->user()->NamaCustomer }}</span>
+        Selamat datang, <span class="text-primary-blue"><?php echo e(auth('customer')->user()->NamaCustomer); ?></span>
     </h1>
 
 
 
 
 
-    @include('sections.header')
-    @include('sections.hero')
-    @include('sections.caraousel')
-    @include('sections.about')
-    @include('sections.destinations')
-    @include('sections.footer')
+    <?php echo $__env->make('sections.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.hero', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.caraousel', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.about', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.destinations', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <a href="#home" class="fixed bottom-6 right-6 bg-primary-blue text-white p-3 rounded-full shadow-lg">
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
@@ -61,3 +61,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/pages/customerHome.blade.php ENDPATH**/ ?>

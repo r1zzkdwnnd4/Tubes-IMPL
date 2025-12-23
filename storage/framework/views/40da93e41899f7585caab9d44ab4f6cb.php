@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,12 +25,12 @@
             background-color: #fff;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .container h1 {
-            color: #003366; 
+            color: #003366;
             font-size: 28px;
             margin-bottom: 20px;
         }
@@ -40,7 +41,7 @@
         }
 
         .btn {
-            background-color: #003366; 
+            background-color: #003366;
             color: #fff;
             padding: 12px 20px;
             border: none;
@@ -56,7 +57,7 @@
         }
 
         .btn-ticket {
-            background-color: #0066cc; 
+            background-color: #0066cc;
         }
 
         .btn-ticket:hover {
@@ -64,16 +65,19 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <h1>Pembayaran Berhasil!</h1>
         <p>Terima kasih telah melakukan pembayaran. Tiket Anda telah dikonfirmasi.</p>
         <div>
-            <a href="tiket.php" class="btn btn-ticket">Lihat Tiket</a>
+            <a href="<?php echo e(route('customer.tiket', $kodeBooking)); ?>" class="btn btn-ticket">
+                Lihat Tiket
+            </a>
         </div>
     </div>
 
 </body>
-</html>
-<?php /**PATH C:\laragon\www\travelaa\resources\views/pages/konfirmasi-pembayaran.blade.php ENDPATH**/ ?>
+
+</html><?php /**PATH C:\laragon\www\travelaa\resources\views/pages/konfirmasi-pembayaran.blade.php ENDPATH**/ ?>

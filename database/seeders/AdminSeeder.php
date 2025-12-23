@@ -8,20 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         DB::table('Admin')->insert([
             [
-                'Id_admin'   => 1,
                 'Departemen' => 'Super Admin',
                 'Email'      => 'admin@travela.com',
-                'Password'   => Hash::make('admin123'),
+                'Password'   => Hash::make('admin123')
             ],
             [
-                'Id_admin'   => 2,
-                'Departemen' => 'Manajemen',
-                'Email'      => 'manager@travela.com',
-                'Password'   => Hash::make('manager123'),
+                'Departemen' => 'Finance',
+                'Email'      => 'finance@travela.com',
+                'Password'   => Hash::make('finance123')
             ],
         ]);
     }
