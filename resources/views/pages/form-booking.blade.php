@@ -13,31 +13,46 @@
     <div class="booking-form">
         <h3>Online Booking</h3>
 
-        <!-- Kirim ke payment.php -->
-        <form action="payment.php" method="POST">
+        {{-- FORM BOOKING LARAVEL --}}
+        <form action="{{ route('customer.booking.store') }}" method="POST">
+            @csrf
+
             <div class="row">
                 <div class="col">
                     <label>Nama Lengkap</label>
-                    <input type="text" name="nama" placeholder="Masukkan Nama Lengkap" required>
+                    <input type="text"
+                           name="NamaCustomer"
+                           value="{{ auth('customer')->user()->NamaCustomer ?? '' }}"
+                           readonly>
                 </div>
+
                 <div class="col">
                     <label>Email</label>
-                    <input type="email" name="email" placeholder="Masukkan Email" required>
+                    <input type="email"
+                           name="Email"
+                           value="{{ auth('customer')->user()->Email ?? '' }}"
+                           readonly>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label>No Telepon</label>
-                    <input type="number" name="telp" placeholder="Masukkan No Telepon" required>
+                    <input type="text"
+                           name="NoHP"
+                           value="{{ auth('customer')->user()->NoHP ?? '' }}"
+                           required>
                 </div>
+
                 <div class="col">
-                    <label>Destinasi (Harga per Orang)</label>
-                    <select name="destinasi" required>
-                        <option disabled selected>Pilih Destinasi</option>
-                        <option>Destinasi 1</option>
-                        <option>Destinasi 2</option>
-                        <option>Destinasi 3</option>
+                    <label>Destinasi Wisata</label>
+                    <select name="Id_wisata" required>
+                        <option value="" disabled selected>Pilih Destinasi</option>
+                        @foreach ($wisata as $w)
+                            <option value="{{ $w->Id_wisata }}">
+                                {{ $w->NamaWisata }} - Rp{{ number_format($w->Harga) }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -45,15 +60,16 @@
             <div class="row">
                 <div class="col">
                     <label>Jumlah Orang</label>
-                    <input type="number" name="jumlah" placeholder="Masukkan Jumlah Orang" required>
+                    <input type="number" name="JumlahOrang" min="1" required>
                 </div>
+
                 <div class="col">
                     <label>Metode Pembayaran</label>
-                    <select name="metode" required>
-                        <option disabled selected>Pilih Metode Pembayaran</option>
-                        <option>Kartu Kredit</option>
-                        <option>Paypal</option>
-                        <option>Transfer Bank</option>
+                    <select name="MetodePembayaran" required>
+                        <option value="" disabled selected>Pilih Metode</option>
+                        <option value="Kartu Kredit">Kartu Kredit</option>
+                        <option value="Paypal">Paypal</option>
+                        <option value="Transfer Bank">Transfer Bank</option>
                     </select>
                 </div>
             </div>
@@ -61,11 +77,13 @@
             <div class="row">
                 <div class="col">
                     <label>Tanggal Travel</label>
-                    <input type="date" name="tanggal" required>
+                    <input type="date" name="Tanggal" required>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit">Lanjutkan ke Pembayaran</button>
+            <button type="submit" class="btn-submit">
+                Lanjutkan ke Pembayaran
+            </button>
         </form>
     </div>
 

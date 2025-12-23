@@ -38,4 +38,4 @@
         <p class="text-center text-gray-500 mt-8">© Travela - Kelompok 4</p>
     </div>
 </footer>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/sections/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/footer.blade.php ENDPATH**/ ?>

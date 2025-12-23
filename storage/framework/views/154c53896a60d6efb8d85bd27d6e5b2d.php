@@ -35,4 +35,4 @@
             </div>
         </div>
     </section>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/sections/about.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/about.blade.php ENDPATH**/ ?>

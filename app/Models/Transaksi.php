@@ -7,8 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Transaksi extends Model
 {
     protected $table = 'Transaksi';
-    protected $primaryKey = 'Id_Transaksi';
+    protected $primaryKey = 'Id_transaksi';
     public $timestamps = false;
+
+    protected $fillable = [
+        'Id_cust',
+        'Id_wisata',
+        'Jumlah_Orang',
+        'Tanggal_Travel',
+        'Metode_Pembayaran',
+        'Total',
+        'Status',
+        'Kode_Booking'
+    ];
+
 
     public function wisata()
     {

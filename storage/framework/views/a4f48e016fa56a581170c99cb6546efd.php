@@ -27,4 +27,4 @@
 
     </div>
 </div>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/sections/caraousel.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/caraousel.blade.php ENDPATH**/ ?>

@@ -28,4 +28,4 @@
         </button>
     </div>
 </section>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/sections/hero.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/hero.blade.php ENDPATH**/ ?>

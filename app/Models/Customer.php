@@ -17,6 +17,7 @@ class Customer extends Authenticatable
         'NamaCustomer',
         'Email',
         'Password',
+        'Alamat',
         'NoHP'
     ];
 

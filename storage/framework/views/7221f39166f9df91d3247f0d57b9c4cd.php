@@ -60,4 +60,4 @@
         </div>
     </div>
 </section>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/sections/destinations.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/destinations.blade.php ENDPATH**/ ?>

@@ -5,57 +5,97 @@ use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\AgenAuthController;
 use App\Http\Controllers\Auth\AdminCustomerController;
+use App\Http\Controllers\Auth\BookingController;
+use App\Http\Controllers\Auth\PaymentController;
 
-// ---------------------
-// PUBLIC
-// ---------------------
+/*
+|--------------------------------------------------------------------------
+| PUBLIC
+|--------------------------------------------------------------------------
+*/
 Route::view('/', 'pages.home')->name('home');
 
-// ---------------------
-// CUSTOMER AUTH
-// ---------------------
+/*
+|--------------------------------------------------------------------------
+| CUSTOMER AUTH
+|--------------------------------------------------------------------------
+*/
 Route::get('/customer/register', [CustomerAuthController::class, 'showRegister'])
     ->name('customer.register');
+
 Route::post('/customer/register', [CustomerAuthController::class, 'register'])
     ->name('customer.register.process');
 
 Route::get('/customer/login', [CustomerAuthController::class, 'showLogin'])
     ->name('customer.login');
+
 Route::post('/customer/login', [CustomerAuthController::class, 'login'])
     ->name('customer.login.process');
 
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
     ->name('customer.logout');
 
-Route::get('/customer/home', fn() => view('pages.customerHome'))
-    ->name('customer.home')
-    ->middleware('auth:customer');
+/*
+|--------------------------------------------------------------------------
+| CUSTOMER (AUTHENTICATED)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth:customer')->group(function () {
 
-Route::view('/form-booking', 'pages.form-booking')->name('form.booking');
+    // HOME
+    Route::get('/customer/home', fn () => view('pages.customerHome'))
+        ->name('customer.home');
 
-// ---------------------
-// ADMIN AUTH
-// ---------------------
-Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.process');
+    // BOOKING
+    Route::get('/customer/booking', [BookingController::class, 'create'])
+        ->name('form.booking');
 
-Route::middleware(['auth:admin'])->group(function () {
+    Route::post('/customer/booking', [BookingController::class, 'store'])
+        ->name('customer.booking.store');
 
-    // Dashboard
-    Route::get('/admin/dashboard', fn() => view('pages.adminDashboard'))
+    // PAYMENT
+    Route::get('/customer/payment', [PaymentController::class, 'show'])
+        ->name('customer.payment');
+
+    Route::post('/customer/konfirmasi', [PaymentController::class, 'konfirmasi'])
+        ->name('customer.konfirmasi');
+
+    Route::get('/customer/konfirmasi', fn () => view('pages.konfirmasi-pembayaran'))
+        ->name('konfirmasi.pembayaran');
+
+    // TIKET (PAKAI KODE BOOKING)
+    Route::get('/customer/tiket/{kode_booking}', 
+        [PaymentController::class, 'tiket']
+    )->name('customer.tiket');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN AUTH
+|--------------------------------------------------------------------------
+*/
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
+    ->name('admin.login');
+
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->name('admin.login.process');
+
+Route::middleware('auth:admin')->group(function () {
+
+    // DASHBOARD
+    Route::get('/admin/dashboard', fn () => view('pages.adminDashboard'))
         ->name('admin.dashboard');
 
-    Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
+        ->name('admin.logout');
 
-    // Manajemen Wisata
-    Route::get('/admin/manajemen-wisata', fn() => view('pages.adminManajemenWisata'))
+    // MANAJEMEN WISATA
+    Route::get('/admin/manajemen-wisata', fn () => view('pages.adminManajemenWisata'))
         ->name('admin.wisata');
 
-    // -------------------------
-    // Manajemen Customer
-    // -------------------------
+    // MANAJEMEN CUSTOMER
     Route::get('/admin/manajemen-customer', [AdminCustomerController::class, 'index'])
-        ->name('admin.customer'); // untuk menampilkan view
+        ->name('admin.customer');
 
     Route::post('/admin/manajemen-customer', [AdminCustomerController::class, 'store'])
         ->name('admin.customer.store');
@@ -66,25 +106,29 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::delete('/admin/manajemen-customer/{id}', [AdminCustomerController::class, 'destroy'])
         ->name('admin.customer.delete');
 
-    // Manajemen Agen
-    Route::get('/admin/manajemen-agen', fn() => view('pages.adminManajemenAgen'))
+    // MANAJEMEN AGEN
+    Route::get('/admin/manajemen-agen', fn () => view('pages.adminManajemenAgen'))
         ->name('admin.agen');
 
-    // Manajemen Transaksi
-    Route::get('/admin/manajemen-transaksi', fn() => view('pages.adminHistoryTransaksi'))
+    // HISTORY TRANSAKSI
+    Route::get('/admin/manajemen-transaksi', fn () => view('pages.adminHistoryTransaksi'))
         ->name('admin.transaksi');
 });
 
-// ---------------------
-// AGEN AUTH
-// ---------------------
+/*
+|--------------------------------------------------------------------------
+| AGEN AUTH
+|--------------------------------------------------------------------------
+*/
 Route::get('/agen/login', [AgenAuthController::class, 'showLogin'])
     ->name('agen.login');
+
 Route::post('/agen/login', [AgenAuthController::class, 'login'])
     ->name('agen.login.process');
 
 Route::middleware('auth:agen')->group(function () {
-    Route::get('/agen/dashboard', fn() => view('pages.agenDashboard'))
+
+    Route::get('/agen/dashboard', fn () => view('pages.agenDashboard'))
         ->name('agen.dashboard');
 
     Route::post('/agen/logout', [AgenAuthController::class, 'logout'])
