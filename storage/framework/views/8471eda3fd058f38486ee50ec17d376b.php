@@ -98,12 +98,14 @@
         { id: "TRX005", customer: "Rahmat Hidayat", paket: "Bromo Sunrise", total: "Rp 1.800.000", status: "Selesai", tanggal: "2025-12-06" },
     ];
 
+    //warna status
     const statusColor = {
         "Selesai": "bg-green-100 text-green-600",
         "Proses": "bg-blue-100 text-blue-600",
         "Pending": "bg-yellow-100 text-yellow-600",
     };
 
+    //tabelnya
     const tbody = document.getElementById("transactionTable");
 
     transactions.forEach(tr => {
