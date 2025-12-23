@@ -35,6 +35,6 @@
 
         </div>
 
-        <p class="text-center text-gray-500 mt-8">© Travela - Kelompok 6</p>
+        <p class="text-center text-gray-500 mt-8">© Travela - Kelompok 4</p>
     </div>
 </footer>
