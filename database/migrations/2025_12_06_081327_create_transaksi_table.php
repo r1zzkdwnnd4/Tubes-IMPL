@@ -13,12 +13,28 @@ return new class extends Migration {
             $table->unsignedInteger('Id_cust');
             $table->unsignedInteger('Id_wisata');
 
-            $table->decimal('Total', 12, 2);
-            $table->string('Status', 50);
-            $table->date('Tanggal');
+            // === DATA BOOKING ===
+            $table->integer('Jumlah_Orang');
+            $table->date('Tanggal_Travel');
 
-            $table->foreign('Id_cust')->references('Id_cust')->on('Customer')->onDelete('cascade');
-            $table->foreign('Id_wisata')->references('Id_wisata')->on('Wisata')->onDelete('cascade');
+            // === PEMBAYARAN (DUMMY) ===
+            $table->string('Metode_Pembayaran', 50);
+
+            // === TOTAL & STATUS ===
+            $table->decimal('Total', 12, 2);
+            $table->string('Status', 30)->default('menunggu');
+
+            // === IDENTITAS BOOKING ===
+            $table->string('Kode_Booking', 20)->unique();
+
+            // === RELASI ===
+            $table->foreign('Id_cust')
+                ->references('Id_cust')->on('Customer')
+                ->onDelete('cascade');
+
+            $table->foreign('Id_wisata')
+                ->references('Id_wisata')->on('Wisata')
+                ->onDelete('cascade');
         });
     }
 
