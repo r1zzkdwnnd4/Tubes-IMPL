@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Agen</title>
+    <title>Manajemen Wisata</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -11,72 +11,76 @@
 
 <div class="flex min-h-screen">
 
-    @include('sections.adminSidebar')
+    
+    <?php echo $__env->make('sections.adminSidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
+    
     <main class="flex-1 p-8">
 
-        {{-- HEADER --}}
+        
         <div class="flex justify-between items-center mb-6">
             <div>
-                <h2 class="text-2xl font-semibold">Manajemen Agen</h2>
-                <p class="text-gray-500">Kelola agen wisata</p>
+                <h2 class="text-2xl font-semibold">Manajemen Wisata</h2>
+                <p class="text-gray-500">Kelola paket wisata yang tersedia</p>
             </div>
 
             <button onclick="openAddModal()"
                 class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                + Tambah Agen
+                + Tambah Paket Wisata
             </button>
         </div>
 
-        {{-- FLASH MESSAGE --}}
-        @if(session('success'))
+        
+        <?php if(session('success')): ?>
             <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
-                {{ session('success') }}
-            </div>
-        @endif
+                <?php echo e(session('success')); ?>
 
-        {{-- TABLE --}}
+            </div>
+        <?php endif; ?>
+
+        
         <div class="rounded-xl shadow mb-10 overflow-hidden border border-gray-300 bg-white">
             <table class="w-full border-collapse">
                 <thead class="bg-gray-500 text-white">
                     <tr>
                         <th class="p-3 text-left">ID</th>
-                        <th class="p-3 text-left">Nama Agen</th>
+                        <th class="p-3 text-left">Nama Wisata</th>
                         <th class="p-3 text-left">Area</th>
-                        <th class="p-3 text-left">Wisata Dikelola</th>
+                        <th class="p-3 text-left">Harga</th>
                         <th class="p-3 text-center">Aksi</th>
                     </tr>
                 </thead>
 
                 <tbody class="text-black">
-                @forelse ($agen as $a)
+                <?php $__empty_1 = true; $__currentLoopData = $wisata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $w): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="p-3">{{ $a->id_agen }}</td>
-                        <td class="p-3">{{ $a->NamaAgen }}</td>
-                        <td class="p-3">{{ $a->Area }}</td>
+                        <td class="p-3"><?php echo e($w->id_wisata); ?></td>
+                        <td class="p-3"><?php echo e($w->NamaWisata); ?></td>
+                        <td class="p-3"><?php echo e($w->Area); ?></td>
                         <td class="p-3">
-                            {{ $a->wisata ?? '-' }}
+                            Rp <?php echo e(number_format($w->Harga, 0, ',', '.')); ?>
+
                         </td>
                         <td class="p-3 text-center flex gap-3 justify-center">
 
-                            {{-- EDIT --}}
+                            
                             <button
                                 onclick="openEditModal(
-                                    '{{ $a->NamaAgen }}',
-                                    '{{ $a->Email }}',
-                                    '{{ $a->Area }}',
-                                    '{{ route('admin.agen.update', $a->id_agen) }}'
+                                    '<?php echo e($w->NamaWisata); ?>',
+                                    '<?php echo e($w->Area); ?>',
+                                    '<?php echo e($w->Harga); ?>',
+                                    '<?php echo e(route('admin.wisata.update', $w->id_wisata)); ?>'
                                 )"
                                 class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
                                 Edit
                             </button>
 
-                            {{-- DELETE --}}
-                            <form action="{{ route('admin.agen.destroy', $a->id_agen) }}"
+                            
+                            <form action="<?php echo e(route('admin.wisata.destroy', $w->id_wisata)); ?>"
                                   method="POST"
-                                  onsubmit="return confirm('Hapus agen ini?')">
-                                @csrf
-                                @method('DELETE')
+                                  onsubmit="return confirm('Hapus paket wisata ini?')">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button class="text-red-600 hover:underline">
                                     Delete
                                 </button>
@@ -84,13 +88,13 @@
 
                         </td>
                     </tr>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
                         <td colspan="5" class="p-6 text-center text-gray-500">
-                            Data agen belum tersedia
+                            Belum ada data wisata
                         </td>
                     </tr>
-                @endforelse
+                <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -98,80 +102,72 @@
     </main>
 </div>
 
-{{-- ================= MODAL TAMBAH AGEN ================= --}}
+
 <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
         <button onclick="closeAddModal()"
             class="absolute top-3 right-3 text-gray-500 hover:text-black">✖</button>
 
-        <h2 class="text-xl font-bold mb-4">Tambah Agen</h2>
+        <h2 class="text-xl font-bold mb-4">Tambah Paket Wisata</h2>
 
-        <form action="{{ route('admin.agen.store') }}" method="POST">
-            @csrf
+        <form action="<?php echo e(route('admin.wisata.store')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
 
             <div class="mb-3">
-                <label class="font-semibold">Nama Agen</label>
-                <input type="text" name="nama_agen"
+                <label class="font-semibold">Nama Wisata</label>
+                <input type="text" name="nama_wisata"
                     class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
 
             <div class="mb-3">
-                <label class="font-semibold">Email</label>
-                <input type="email" name="email"
-                    class="w-full mt-1 px-3 py-2 border rounded-lg" required>
-            </div>
-
-            <div class="mb-6">
                 <label class="font-semibold">Area</label>
                 <input type="text" name="area"
                     class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
 
-             <div class="mb-6">
-                <label class="font-semibold">Password</label>
-                <input type="password" name="password"
-                class="w-full mt-1 px-3 py-2 border rounded-lg">
+            <div class="mb-6">
+                <label class="font-semibold">Harga</label>
+                <input type="number" name="harga"
+                    class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
-            
-
 
             <button type="submit"
                 class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
-                Tambah Agen
+                Tambah Wisata
             </button>
         </form>
     </div>
 </div>
 
-{{-- ================= MODAL EDIT AGEN ================= --}}
+
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
         <button onclick="closeEditModal()"
             class="absolute top-3 right-3 text-gray-500 hover:text-black">✖</button>
 
-        <h2 class="text-xl font-bold mb-4">Edit Agen</h2>
+        <h2 class="text-xl font-bold mb-4">Edit Paket Wisata</h2>
 
         <form id="editForm" method="POST">
-            @csrf
-            @method('PUT')
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
 
             <div class="mb-3">
-                <label class="font-semibold">Nama Agen</label>
-                <input type="text" name="nama_agen" id="edit_nama_agen"
+                <label class="font-semibold">Nama Wisata</label>
+                <input type="text" name="nama_wisata" id="edit_nama_wisata"
                     class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
 
             <div class="mb-3">
-                <label class="font-semibold">Email</label>
-                <input type="email" name="email" id="edit_email"
+                <label class="font-semibold">Area</label>
+                <input type="text" name="area" id="edit_area"
                     class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
 
             <div class="mb-6">
-                <label class="font-semibold">Area</label>
-                <input type="text" name="area" id="edit_area"
+                <label class="font-semibold">Harga</label>
+                <input type="number" name="harga" id="edit_harga"
                     class="w-full mt-1 px-3 py-2 border rounded-lg" required>
             </div>
 
@@ -183,6 +179,7 @@
     </div>
 </div>
 
+
 <script>
 function openAddModal() {
     document.getElementById('addModal').classList.remove('hidden');
@@ -193,10 +190,10 @@ function closeAddModal() {
     document.getElementById('addModal').classList.add('hidden');
 }
 
-function openEditModal(nama, email, area, updateUrl) {
-    document.getElementById('edit_nama_agen').value = nama;
-    document.getElementById('edit_email').value = email;
+function openEditModal(nama, area, harga, updateUrl) {
+    document.getElementById('edit_nama_wisata').value = nama;
     document.getElementById('edit_area').value = area;
+    document.getElementById('edit_harga').value = harga;
     document.getElementById('editForm').action = updateUrl;
 
     document.getElementById('editModal').classList.remove('hidden');
@@ -210,3 +207,4 @@ function closeEditModal() {
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/adminManajemenWisata.blade.php ENDPATH**/ ?>

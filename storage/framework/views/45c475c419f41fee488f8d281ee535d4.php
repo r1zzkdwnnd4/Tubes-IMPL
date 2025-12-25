@@ -11,11 +11,11 @@
 
 <div class="flex min-h-screen">
 
-    @include('sections.adminSidebar')
+    <?php echo $__env->make('sections.adminSidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <main class="flex-1 p-8">
 
-        {{-- HEADER --}}
+        
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-semibold">Manajemen Agen</h2>
@@ -28,14 +28,15 @@
             </button>
         </div>
 
-        {{-- FLASH MESSAGE --}}
-        @if(session('success'))
+        
+        <?php if(session('success')): ?>
             <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
-                {{ session('success') }}
-            </div>
-        @endif
+                <?php echo e(session('success')); ?>
 
-        {{-- TABLE --}}
+            </div>
+        <?php endif; ?>
+
+        
         <div class="rounded-xl shadow mb-10 overflow-hidden border border-gray-300 bg-white">
             <table class="w-full border-collapse">
                 <thead class="bg-gray-500 text-white">
@@ -49,34 +50,35 @@
                 </thead>
 
                 <tbody class="text-black">
-                @forelse ($agen as $a)
+                <?php $__empty_1 = true; $__currentLoopData = $agen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $a): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="p-3">{{ $a->id_agen }}</td>
-                        <td class="p-3">{{ $a->NamaAgen }}</td>
-                        <td class="p-3">{{ $a->Area }}</td>
+                        <td class="p-3"><?php echo e($a->id_agen); ?></td>
+                        <td class="p-3"><?php echo e($a->NamaAgen); ?></td>
+                        <td class="p-3"><?php echo e($a->Area); ?></td>
                         <td class="p-3">
-                            {{ $a->wisata ?? '-' }}
+                            <?php echo e($a->wisata ?? '-'); ?>
+
                         </td>
                         <td class="p-3 text-center flex gap-3 justify-center">
 
-                            {{-- EDIT --}}
+                            
                             <button
                                 onclick="openEditModal(
-                                    '{{ $a->NamaAgen }}',
-                                    '{{ $a->Email }}',
-                                    '{{ $a->Area }}',
-                                    '{{ route('admin.agen.update', $a->id_agen) }}'
+                                    '<?php echo e($a->NamaAgen); ?>',
+                                    '<?php echo e($a->Email); ?>',
+                                    '<?php echo e($a->Area); ?>',
+                                    '<?php echo e(route('admin.agen.update', $a->id_agen)); ?>'
                                 )"
                                 class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
                                 Edit
                             </button>
 
-                            {{-- DELETE --}}
-                            <form action="{{ route('admin.agen.destroy', $a->id_agen) }}"
+                            
+                            <form action="<?php echo e(route('admin.agen.destroy', $a->id_agen)); ?>"
                                   method="POST"
                                   onsubmit="return confirm('Hapus agen ini?')">
-                                @csrf
-                                @method('DELETE')
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button class="text-red-600 hover:underline">
                                     Delete
                                 </button>
@@ -84,13 +86,13 @@
 
                         </td>
                     </tr>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
                         <td colspan="5" class="p-6 text-center text-gray-500">
                             Data agen belum tersedia
                         </td>
                     </tr>
-                @endforelse
+                <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -98,7 +100,7 @@
     </main>
 </div>
 
-{{-- ================= MODAL TAMBAH AGEN ================= --}}
+
 <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
@@ -107,8 +109,8 @@
 
         <h2 class="text-xl font-bold mb-4">Tambah Agen</h2>
 
-        <form action="{{ route('admin.agen.store') }}" method="POST">
-            @csrf
+        <form action="<?php echo e(route('admin.agen.store')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
 
             <div class="mb-3">
                 <label class="font-semibold">Nama Agen</label>
@@ -144,7 +146,7 @@
     </div>
 </div>
 
-{{-- ================= MODAL EDIT AGEN ================= --}}
+
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
     <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
@@ -154,8 +156,8 @@
         <h2 class="text-xl font-bold mb-4">Edit Agen</h2>
 
         <form id="editForm" method="POST">
-            @csrf
-            @method('PUT')
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
 
             <div class="mb-3">
                 <label class="font-semibold">Nama Agen</label>
@@ -210,3 +212,4 @@ function closeEditModal() {
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/adminManajemenAgen.blade.php ENDPATH**/ ?>

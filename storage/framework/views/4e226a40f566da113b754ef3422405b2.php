@@ -11,29 +11,29 @@
 
 <div class="flex">
 
-    @include('sections.adminSidebar')
+    <?php echo $__env->make('sections.adminSidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <main class="flex-1 p-8">
 
-        {{-- HEADER --}}
+        
         <div class="flex justify-between items-center">
             <div>
                 <h2 class="text-2xl font-semibold">Dashboard</h2>
                 <p class="text-gray-500">Selamat datang di admin panel pemesanan wisata</p>
             </div>
 
-            <form method="POST" action="{{ route('admin.logout') }}">
-                @csrf
+            <form method="POST" action="<?php echo e(route('admin.logout')); ?>">
+                <?php echo csrf_field(); ?>
                 <button class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
                     Logout
                 </button>
             </form>
         </div>
 
-        {{-- SUMMARY --}}
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
 
-            {{-- TOTAL CUSTOMER --}}
+            
             <div class="bg-white p-6 rounded-xl shadow flex items-center gap-4">
                 <div class="p-3 bg-blue-100 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-600" fill="none"
@@ -45,12 +45,13 @@
                 <div>
                     <p class="text-gray-500 text-sm">Total Customer</p>
                     <p class="text-xl font-semibold">
-                        {{ number_format($totalCustomer) }}
+                        <?php echo e(number_format($totalCustomer)); ?>
+
                     </p>
                 </div>
             </div>
 
-            {{-- TOTAL WISATA --}}
+            
             <div class="bg-white p-6 rounded-xl shadow flex items-center gap-4">
                 <div class="p-3 bg-purple-100 rounded-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-purple-600" fill="none"
@@ -62,14 +63,15 @@
                 <div>
                     <p class="text-gray-500 text-sm">Total Paket Wisata</p>
                     <p class="text-xl font-semibold">
-                        {{ number_format($totalWisata) }}
+                        <?php echo e(number_format($totalWisata)); ?>
+
                     </p>
                 </div>
             </div>
 
         </div>
 
-        {{-- TRANSAKSI TERBARU --}}
+        
         <div class="mt-10 bg-white p-6 rounded-xl shadow">
             <h3 class="text-lg font-semibold mb-4">Transaksi Terbaru</h3>
 
@@ -87,37 +89,40 @@
                     </thead>
 
                     <tbody>
-                    @forelse ($transaksi as $tr)
+                    <?php $__empty_1 = true; $__currentLoopData = $transaksi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tr): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="p-3">{{ $tr->kode_booking }}</td>
-                            <td class="p-3">{{ $tr->customer }}</td>
-                            <td class="p-3">{{ $tr->paket }}</td>
+                            <td class="p-3"><?php echo e($tr->kode_booking); ?></td>
+                            <td class="p-3"><?php echo e($tr->customer); ?></td>
+                            <td class="p-3"><?php echo e($tr->paket); ?></td>
                             <td class="p-3">
-                                Rp {{ number_format($tr->total, 0, ',', '.') }}
+                                Rp <?php echo e(number_format($tr->total, 0, ',', '.')); ?>
+
                             </td>
                             <td class="p-3">
                                 <span class="px-3 py-1 rounded-full text-sm
-                                    @if($tr->status === 'Selesai')
+                                    <?php if($tr->status === 'Selesai'): ?>
                                         bg-green-100 text-green-600
-                                    @elseif($tr->status === 'Proses')
+                                    <?php elseif($tr->status === 'Proses'): ?>
                                         bg-blue-100 text-blue-600
-                                    @else
+                                    <?php else: ?>
                                         bg-yellow-100 text-yellow-600
-                                    @endif">
-                                    {{ $tr->status }}
+                                    <?php endif; ?>">
+                                    <?php echo e($tr->status); ?>
+
                                 </span>
                             </td>
                             <td class="p-3">
-                                {{ \Carbon\Carbon::parse($tr->tanggal_travel)->format('d M Y') }}
+                                <?php echo e(\Carbon\Carbon::parse($tr->tanggal_travel)->format('d M Y')); ?>
+
                             </td>
                         </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>
                             <td colspan="6" class="p-6 text-center text-gray-500">
                                 Belum ada transaksi
                             </td>
                         </tr>
-                    @endforelse
+                    <?php endif; ?>
                     </tbody>
 
                 </table>
@@ -129,3 +134,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/adminDashboard.blade.php ENDPATH**/ ?>

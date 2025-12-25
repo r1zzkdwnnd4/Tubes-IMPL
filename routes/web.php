@@ -7,6 +7,15 @@ use App\Http\Controllers\Auth\AgenAuthController;
 use App\Http\Controllers\Auth\AdminCustomerController;
 use App\Http\Controllers\Auth\BookingController;
 use App\Http\Controllers\Auth\PaymentController;
+use App\Http\Controllers\Auth\AdminTransaksiController;
+use App\Http\Controllers\Auth\AdminWisataController;
+use App\Http\Controllers\Auth\AdminAgenController;
+use App\Http\Controllers\Auth\AdminDashboardController;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -83,15 +92,25 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])
 Route::middleware('auth:admin')->group(function () {
 
     // DASHBOARD
-    Route::get('/admin/dashboard', fn () => view('pages.adminDashboard'))
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
+
 
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
         ->name('admin.logout');
 
     // MANAJEMEN WISATA
-    Route::get('/admin/manajemen-wisata', fn () => view('pages.adminManajemenWisata'))
-        ->name('admin.wisata');
+    Route::get('/admin/manajemen-wisata', [AdminWisataController::class, 'index'])
+    ->name('admin.wisata');
+    Route::post('/admin/manajemen-wisata', [AdminWisataController::class, 'store'])
+    ->name('admin.wisata.store');
+
+    Route::put('/admin/manajemen-wisata/{id}', [AdminWisataController::class, 'update'])
+        ->name('admin.wisata.update');
+
+    Route::delete('/admin/manajemen-wisata/{id}', [AdminWisataController::class, 'destroy'])
+        ->name('admin.wisata.destroy');
+
 
     // MANAJEMEN CUSTOMER
     Route::get('/admin/manajemen-customer', [AdminCustomerController::class, 'index'])
@@ -107,11 +126,20 @@ Route::middleware('auth:admin')->group(function () {
         ->name('admin.customer.delete');
 
     // MANAJEMEN AGEN
-    Route::get('/admin/manajemen-agen', fn () => view('pages.adminManajemenAgen'))
-        ->name('admin.agen');
+    Route::get('/admin/manajemen-agen', [AdminAgenController::class, 'index'])
+    ->name('admin.agen');
+    Route::post('/admin/manajemen-agen', [AdminAgenController::class, 'store'])
+    ->name('admin.agen.store');
+    Route::put('/admin/manajemen-agen/{id}', [AdminAgenController::class, 'update'])
+        ->name('admin.agen.update');
+
+    Route::delete('/admin/manajemen-agen/{id}', [AdminAgenController::class, 'destroy'])
+        ->name('admin.agen.destroy');
+
 
     // HISTORY TRANSAKSI
-    Route::get('/admin/manajemen-transaksi', fn () => view('pages.adminHistoryTransaksi'))
+    
+    Route::get('/admin/manajemen-transaksi', [AdminTransaksiController::class, 'index'])
         ->name('admin.transaksi');
 });
 
