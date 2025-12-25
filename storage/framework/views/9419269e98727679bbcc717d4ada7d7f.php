@@ -17,9 +17,9 @@
                         'light-bg': '#F8FAFC',
                     },
                     backgroundImage: {
-                        'hero-bali': "url('https://placehold.co/1920x800/25364D/FFFFFF?text=Pemandangan+Sunset+Bali+Untuk+Hero')",
-                        'about-bali': "url('https://placehold.co/1920x400/25364D/FFFFFF?text=Gunung+Pura+Bali+untuk+About')",
-                        'dest-bali': "url('https://placehold.co/1920x400/25364D/FFFFFF?text=Pura+untuk+Destinasi')"
+                        'hero-bali': "url('/images/img1.jpg')",
+                        'about-bali': "url('/images/img2.jpg')",
+                        'dest-bali': "url('/images/img3.jpg')"
                     }
                 }
             }
@@ -36,6 +36,13 @@
     </style>
 </head>
 <body class="bg-white">
+    <h1 class="text-1xl font-semibold text-gray-800 mb-4 px-6">
+        Selamat datang, <span class="text-primary-blue"><?php echo e(auth('customer')->user()->NamaCustomer); ?></span>
+    </h1>
+
+
+
+
 
     <?php echo $__env->make('sections.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('sections.hero', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -50,8 +57,53 @@
 
     <script>
         lucide.createIcons();
+        const hero = document.getElementById('hero');
+
+    const images = [
+        '/images/img1.jpg',
+        '/images/img2.jpg',
+        '/images/img3.jpg',
+        '/images/img4.jpg',
+        '/images/img5.jpg'
+    ];
+
+    let index = 0;
+
+    // Set awal
+    hero.style.backgroundImage = `url('${images[index]}')`;
+
+    setInterval(() => {
+        index = (index + 1) % images.length;
+        hero.style.backgroundImage = `url('${images[index]}')`;
+    }, 5000);
+
+     const aboutImages = [
+        '/images/img1.jpg',
+        '/images/img2.jpg',
+        '/images/img3.jpg',
+        '/images/img4.jpg',
+        '/images/img5.jpg'
+    ];
+
+    let aboutIndex = 0;
+    const aboutImg = document.getElementById('aboutImage');
+
+    // set gambar awal
+    aboutImg.src = aboutImages[aboutIndex];
+    aboutImg.style.opacity = 1;
+
+    setInterval(() => {
+        aboutImg.style.opacity = 0;
+
+        setTimeout(() => {
+            aboutIndex = (aboutIndex + 1) % aboutImages.length;
+            aboutImg.src = aboutImages[aboutIndex];
+            aboutImg.style.opacity = 1;
+        }, 500); // setengah dari durasi transition
+    }, 5000);
     </script>
+
 
 </body>
 </html>
-<?php /**PATH C:\laragon\www\Tubes-IMPL\resources\views/pages/home.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/pages/customerHome.blade.php ENDPATH**/ ?>
