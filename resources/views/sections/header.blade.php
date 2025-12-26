@@ -4,17 +4,17 @@
         {{-- LOGO --}}
         <div class="flex items-center space-x-2">
             <i data-lucide="map-pin" class="text-primary-blue w-6 h-6"></i>
-             @auth('customer')
-        <a href="{{ route('customer.home') }}"
-           class="text-xl font-bold text-gray-800">
-            Travela
-        </a>
-    @else
-        <a href="{{ route('home') }}"
-           class="text-xl font-bold text-gray-800">
-            Travela
-        </a>
-    @endauth
+            @auth('customer')
+            <a href="{{ route('customer.home') }}"
+                class="text-xl font-bold text-gray-800">
+                Travela
+            </a>
+            @else
+            <a href="{{ route('home') }}"
+                class="text-xl font-bold text-gray-800">
+                Travela
+            </a>
+            @endauth
         </div>
 
         <div class="flex items-center space-x-6">
@@ -22,50 +22,55 @@
             {{-- ================= CUSTOMER HOME ================= --}}
             @if(Route::is('customer.home'))
 
-                <a href="#home"
-                   class="nav-link text-white bg-primary-blue py-2 px-3 rounded-lg">
-                    Home
-                </a>
+            
 
-                <a href="#about"
-                   class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                    About
-                </a>
+            <a href="#about"
+                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
+                About
+            </a>
 
-                <a href="#destination"
-                   class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                    Destination
-                </a>
+            <a href="#destination"
+                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
+                Destination
+            </a>
 
-                <a href="#footer"
-                   class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                    Contact
-                </a>
+            <a href="#footer"
+                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
+                Contact
+            </a>
 
-                {{-- KE KATALOG --}}
-                <a href="{{ route('wisata.katalog') }}"
-                   class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                    Katalog
-                </a>
+            {{-- KE KATALOG --}}
+            <a href="{{ route('wisata.katalog') }}"
+                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                Katalog
+            </a>
 
             {{-- ================= KATALOG ================= --}}
             @elseif(Route::is('wisata.katalog'))
 
-                <a href="{{ route('customer.home') }}"
-                   class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                    Home
-                </a>
+            <a href="{{ route('customer.home') }}"
+                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                Home
+            </a>
 
             @endif
 
             {{-- BOOK --}}
+            {{-- JIKA BELUM LOGIN --}}
+            @guest('customer')
+            <a href="{{ route('customer.login') }}"
+                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                Login
+            </a>
+            @endguest
+
+            {{-- JIKA SUDAH LOGIN --}}
+            @auth('customer')
             <a href="{{ route('form.booking') }}"
-               class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
                 Book Now
             </a>
 
-            {{-- LOGOUT --}}
-            @auth('customer')
             <form method="POST" action="{{ route('customer.logout') }}">
                 @csrf
                 <button
@@ -75,6 +80,7 @@
                 </button>
             </form>
             @endauth
+
 
         </div>
     </nav>

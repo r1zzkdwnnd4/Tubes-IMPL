@@ -50,6 +50,50 @@
 
     <script>
         lucide.createIcons();
+        const hero = document.getElementById('hero');
+
+    const images = [
+        '/images/img1.jpg',
+        '/images/img2.jpg',
+        '/images/img3.jpg',
+        '/images/img4.jpg',
+        '/images/img5.jpg'
+    ];
+
+    let index = 0;
+
+    // Set awal
+    hero.style.backgroundImage = `url('${images[index]}')`;
+
+    setInterval(() => {
+        index = (index + 1) % images.length;
+        hero.style.backgroundImage = `url('${images[index]}')`;
+    }, 5000);
+
+     const aboutImages = [
+        '/images/img1.jpg',
+        '/images/img2.jpg',
+        '/images/img3.jpg',
+        '/images/img4.jpg',
+        '/images/img5.jpg'
+    ];
+
+    let aboutIndex = 0;
+    const aboutImg = document.getElementById('aboutImage');
+
+    // set gambar awal
+    aboutImg.src = aboutImages[aboutIndex];
+    aboutImg.style.opacity = 1;
+
+    setInterval(() => {
+        aboutImg.style.opacity = 0;
+
+        setTimeout(() => {
+            aboutIndex = (aboutIndex + 1) % aboutImages.length;
+            aboutImg.src = aboutImages[aboutIndex];
+            aboutImg.style.opacity = 1;
+        }, 500); // setengah dari durasi transition
+    }, 5000);
     </script>
 
 </body>
