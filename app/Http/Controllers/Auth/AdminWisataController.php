@@ -4,22 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Wisata;
 
 class AdminWisataController extends Controller
 {
     // ===================== READ =====================
     public function index()
     {
-        $wisata = DB::table('wisata')
-            ->select(
-                'id_wisata',
-                'NamaWisata',
-                'Area',
-                'Harga'
-            )
-            ->orderByDesc('id_wisata')
-            ->get();
+        $wisata = Wisata::orderByDesc('Id_wisata')->get();
 
         return view('pages.adminManajemenWisata', compact('wisata'));
     }
@@ -33,9 +25,9 @@ class AdminWisataController extends Controller
             'harga'       => 'required|numeric'
         ]);
 
-        DB::table('wisata')->insert([
+        Wisata::create([
             'NamaWisata' => $request->nama_wisata,
-            'Area'       => $request->area,
+            'Area'       => ucwords(strtolower(trim($request->area))), // NORMALISASI
             'Harga'      => $request->harga
         ]);
 
@@ -53,13 +45,11 @@ class AdminWisataController extends Controller
             'harga'       => 'required|numeric'
         ]);
 
-        DB::table('wisata')
-            ->where('id_wisata', $id)
-            ->update([
-                'NamaWisata' => $request->nama_wisata,
-                'Area'       => $request->area,
-                'Harga'      => $request->harga
-            ]);
+        Wisata::where('Id_wisata', $id)->update([
+            'NamaWisata' => $request->nama_wisata,
+            'Area'       => ucwords(strtolower(trim($request->area))), // NORMALISASI
+            'Harga'      => $request->harga
+        ]);
 
         return redirect()
             ->route('admin.wisata')
@@ -69,9 +59,7 @@ class AdminWisataController extends Controller
     // ===================== DELETE =====================
     public function destroy($id)
     {
-        DB::table('wisata')
-            ->where('id_wisata', $id)
-            ->delete();
+        Wisata::where('Id_wisata', $id)->delete();
 
         return redirect()
             ->route('admin.wisata')

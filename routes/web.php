@@ -1,23 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// CUSTOMER
 use App\Http\Controllers\Auth\CustomerAuthController;
-use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\Auth\AgenAuthController;
-use App\Http\Controllers\Auth\AdminCustomerController;
+use App\Http\Controllers\Auth\CustomerHomeController;
 use App\Http\Controllers\Auth\BookingController;
 use App\Http\Controllers\Auth\PaymentController;
+use App\Http\Controllers\Auth\WisataKatalogController;
+
+// ADMIN
+use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\AdminCustomerController;
 use App\Http\Controllers\Auth\AdminTransaksiController;
 use App\Http\Controllers\Auth\AdminWisataController;
 use App\Http\Controllers\Auth\AdminAgenController;
 use App\Http\Controllers\Auth\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminLaporanController;
 
-
-
-
-
-
+// AGEN
+use App\Http\Controllers\Auth\AgenAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +55,8 @@ Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
 */
 Route::middleware('auth:customer')->group(function () {
 
-    // HOME
-    Route::get('/customer/home', fn () => view('pages.customerHome'))
+    // HOME (PAKAI CONTROLLER — INI YANG BENAR)
+    Route::get('/customer/home', [CustomerHomeController::class, 'index'])
         ->name('customer.home');
 
     // BOOKING
@@ -82,6 +84,22 @@ Route::middleware('auth:customer')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| KATALOG WISATA (PUBLIC)
+|--------------------------------------------------------------------------
+*/
+Route::get('/wisata/katalog', function () {
+    return view('pages.katalog-wisata');
+})->name('wisata.katalog');
+
+
+
+Route::get('/wisata/katalog', [WisataKatalogController::class, 'index'])
+    ->name('wisata.katalog');
+
+
+
+/*
+|--------------------------------------------------------------------------
 | ADMIN AUTH
 |--------------------------------------------------------------------------
 */
@@ -91,29 +109,27 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])
 Route::post('/admin/login', [AdminAuthController::class, 'login'])
     ->name('admin.login.process');
 
-
 Route::middleware(['auth:admin', 'block.manager'])->group(function () {
 
     // DASHBOARD
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
         ->name('admin.dashboard');
 
-
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])
         ->name('admin.logout');
 
     // MANAJEMEN WISATA
     Route::get('/admin/manajemen-wisata', [AdminWisataController::class, 'index'])
-    ->name('admin.wisata');
+        ->name('admin.wisata');
+
     Route::post('/admin/manajemen-wisata', [AdminWisataController::class, 'store'])
-    ->name('admin.wisata.store');
+        ->name('admin.wisata.store');
 
     Route::put('/admin/manajemen-wisata/{id}', [AdminWisataController::class, 'update'])
         ->name('admin.wisata.update');
 
     Route::delete('/admin/manajemen-wisata/{id}', [AdminWisataController::class, 'destroy'])
         ->name('admin.wisata.destroy');
-
 
     // MANAJEMEN CUSTOMER
     Route::get('/admin/manajemen-customer', [AdminCustomerController::class, 'index'])
@@ -130,22 +146,22 @@ Route::middleware(['auth:admin', 'block.manager'])->group(function () {
 
     // MANAJEMEN AGEN
     Route::get('/admin/manajemen-agen', [AdminAgenController::class, 'index'])
-    ->name('admin.agen');
+        ->name('admin.agen');
+
     Route::post('/admin/manajemen-agen', [AdminAgenController::class, 'store'])
-    ->name('admin.agen.store');
+        ->name('admin.agen.store');
+
     Route::put('/admin/manajemen-agen/{id}', [AdminAgenController::class, 'update'])
         ->name('admin.agen.update');
 
     Route::delete('/admin/manajemen-agen/{id}', [AdminAgenController::class, 'destroy'])
         ->name('admin.agen.destroy');
 
-
-    // HISTORY TRANSAKSI
-    
+    // TRANSAKSI
     Route::get('/admin/manajemen-transaksi', [AdminTransaksiController::class, 'index'])
         ->name('admin.transaksi');
 
-        // ===== LAPORAN =====
+    // LAPORAN
     Route::get('/admin/laporan/transaksi', [AdminLaporanController::class, 'laporanTransaksi'])
         ->name('admin.laporan.transaksi');
 
@@ -155,28 +171,6 @@ Route::middleware(['auth:admin', 'block.manager'])->group(function () {
     Route::get('/admin/laporan/agen', [AdminLaporanController::class, 'laporanAgen'])
         ->name('admin.laporan.agen');
 });
-
-Route::middleware('auth:admin')->group(function () {
-
-    Route::get('/manager/laporan/transaksi', [AdminLaporanController::class, 'laporanTransaksi'])
-        ->name('manager.laporan.transaksi');
-
-    Route::get('/manager/laporan/pelanggan', [AdminLaporanController::class, 'laporanPelanggan'])
-        ->name('manager.laporan.pelanggan');
-
-    Route::get('/manager/laporan/agen', [AdminLaporanController::class, 'laporanAgen'])
-        ->name('manager.laporan.agen');
-
-});
-
-Route::middleware('auth:admin')->group(function () {
-
-    Route::get('/manager/dashboard', function () {
-        return view('pages.dashboard');
-    })->name('manager.dashboard');
-
-});
-
 
 /*
 |--------------------------------------------------------------------------

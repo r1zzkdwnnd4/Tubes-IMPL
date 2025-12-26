@@ -18,7 +18,7 @@ class CustomerAuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'NamaCus'  => 'required',
+            'NamaCustomer'  => 'required',
             'Email'    => 'required|email|unique:Customer,Email',
             'Password' => 'required|min:6',
             'Alamat'   => 'nullable',

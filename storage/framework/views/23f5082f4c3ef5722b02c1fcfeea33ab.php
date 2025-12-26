@@ -12,13 +12,13 @@
 
     <div class="flex min-h-screen">
 
-        {{-- SIDEBAR --}}
-        @include('sections.adminSidebar')
+        
+        <?php echo $__env->make('sections.adminSidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-        {{-- CONTENT --}}
+        
         <main class="flex-1 p-8">
 
-            {{-- HEADER --}}
+            
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h2 class="text-2xl font-semibold">Manajemen Wisata</h2>
@@ -31,14 +31,15 @@
                 </button>
             </div>
 
-            {{-- FLASH MESSAGE --}}
-            @if(session('success'))
+            
+            <?php if(session('success')): ?>
             <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-lg">
-                {{ session('success') }}
-            </div>
-            @endif
+                <?php echo e(session('success')); ?>
 
-            {{-- TABLE --}}
+            </div>
+            <?php endif; ?>
+
+            
             <div class="rounded-xl shadow mb-10 overflow-hidden border border-gray-300 bg-white">
                 <table class="w-full border-collapse">
                     <thead class="bg-gray-600 text-white">
@@ -52,33 +53,34 @@
                     </thead>
 
                     <tbody class="text-black">
-                        @forelse ($wisata as $w)
+                        <?php $__empty_1 = true; $__currentLoopData = $wisata; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $w): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <tr class="border-b hover:bg-gray-50">
-                            {{-- FIX UTAMA ADA DI SINI --}}
-                            <td class="p-3">{{ $w->Id_wisata }}</td>
-                            <td class="p-3">{{ $w->NamaWisata }}</td>
-                            <td class="p-3">{{ $w->Area }}</td>
+                            
+                            <td class="p-3"><?php echo e($w->Id_wisata); ?></td>
+                            <td class="p-3"><?php echo e($w->NamaWisata); ?></td>
+                            <td class="p-3"><?php echo e($w->Area); ?></td>
                             <td class="p-3">
-                                Rp {{ number_format($w->Harga, 0, ',', '.') }}
+                                Rp <?php echo e(number_format($w->Harga, 0, ',', '.')); ?>
+
                             </td>
                             <td class="p-3 text-center flex gap-3 justify-center">
 
-                                {{-- EDIT --}}
+                                
                                 <button
                                     class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 edit-btn"
-                                    data-nama="{{ $w->NamaWisata }}"
-                                    data-area="{{ $w->Area }}"
-                                    data-harga="{{ $w->Harga }}"
-                                    data-url="{{ route('admin.wisata.update', $w->Id_wisata) }}">
+                                    data-nama="<?php echo e($w->NamaWisata); ?>"
+                                    data-area="<?php echo e($w->Area); ?>"
+                                    data-harga="<?php echo e($w->Harga); ?>"
+                                    data-url="<?php echo e(route('admin.wisata.update', $w->Id_wisata)); ?>">
                                     Edit
                                 </button>
 
-                                {{-- DELETE --}}
-                                <form action="{{ route('admin.wisata.destroy', $w->Id_wisata) }}"
+                                
+                                <form action="<?php echo e(route('admin.wisata.destroy', $w->Id_wisata)); ?>"
                                     method="POST"
                                     onsubmit="return confirm('Hapus paket wisata ini?')">
-                                    @csrf
-                                    @method('DELETE')
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
                                     <button class="text-red-600 hover:underline">
                                         Delete
                                     </button>
@@ -86,13 +88,13 @@
 
                             </td>
                         </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>
                             <td colspan="5" class="p-6 text-center text-gray-500">
                                 Belum ada data wisata
                             </td>
                         </tr>
-                        @endforelse
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -100,7 +102,7 @@
         </main>
     </div>
 
-    {{-- ================= MODAL TAMBAH WISATA ================= --}}
+    
     <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
@@ -109,8 +111,8 @@
 
             <h2 class="text-xl font-bold mb-4">Tambah Paket Wisata</h2>
 
-            <form action="{{ route('admin.wisata.store') }}" method="POST">
-                @csrf
+            <form action="<?php echo e(route('admin.wisata.store')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
 
                 <div class="mb-3">
                     <label class="font-semibold">Nama Wisata</label>
@@ -138,7 +140,7 @@
         </div>
     </div>
 
-    {{-- ================= MODAL EDIT WISATA ================= --}}
+    
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white w-full max-w-lg p-6 rounded-xl shadow-xl relative">
 
@@ -148,8 +150,8 @@
             <h2 class="text-xl font-bold mb-4">Edit Paket Wisata</h2>
 
             <form id="editForm" method="POST">
-                @csrf
-                @method('PUT')
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('PUT'); ?>
 
                 <div class="mb-3">
                     <label class="font-semibold">Nama Wisata</label>
@@ -177,7 +179,7 @@
         </div>
     </div>
 
-    {{-- ================= SCRIPT ================= --}}
+    
     <script>
         function openAddModal() {
             const modal = document.getElementById('addModal');
@@ -219,4 +221,4 @@
 
 </body>
 
-</html>
+</html><?php /**PATH C:\laragon\www\travelaa\resources\views/pages/adminManajemenWisata.blade.php ENDPATH**/ ?>
