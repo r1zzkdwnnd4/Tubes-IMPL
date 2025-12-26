@@ -21,21 +21,29 @@ class AgenAuthController extends Controller
         ]);
 
         $credentials = [
-            'Email' => $request->Email,
-            'password' => $request->Password
+            'Email' => $request->input('Email'),
+            'password' => $request->input('Password')
         ];
 
         if (Auth::guard('agen')->attempt($credentials)) {
+
+            // WAJIB untuk keamanan (tanpa mengubah struktur field)
+            $request->session()->regenerate();
+
             return redirect()->route('agen.dashboard');
         }
 
         return back()->with('error', 'Email atau password salah');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('agen')->logout();
+
+        // Bersihkan session sepenuhnya
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('agen.login');
     }
 }
-
