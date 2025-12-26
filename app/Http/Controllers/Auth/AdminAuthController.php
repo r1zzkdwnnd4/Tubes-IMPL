@@ -27,8 +27,16 @@ class AdminAuthController extends Controller
 
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+
+        $admin = Auth::guard('admin')->user();
+
+        if ($admin->Departemen === 'Manager') {
+            return redirect()->route('manager.dashboard');
         }
+
+        return redirect()->route('admin.dashboard');
+    }
+
 
         return back()->with('error', 'Email atau password salah');
     }
