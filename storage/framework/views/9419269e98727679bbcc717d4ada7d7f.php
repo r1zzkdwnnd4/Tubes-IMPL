@@ -51,7 +51,7 @@
     <?php echo $__env->make('sections.destinations', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('sections.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    <a href="#home" class="fixed bottom-6 right-6 bg-primary-blue text-white p-3 rounded-full shadow-lg">
+    <a href="#hero" class="fixed bottom-6 right-6 bg-primary-blue text-white p-3 rounded-full shadow-lg">
         <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </a>
 

@@ -4,17 +4,11 @@
         
         <div class="flex items-center space-x-2">
             <i data-lucide="map-pin" class="text-primary-blue w-6 h-6"></i>
-            <?php if(auth()->guard('customer')->check()): ?>
-            <a href="<?php echo e(route('customer.home')); ?>"
+            <a href="#hero"
                 class="text-xl font-bold text-gray-800">
                 Travela
             </a>
-            <?php else: ?>
-            <a href="<?php echo e(route('home')); ?>"
-                class="text-xl font-bold text-gray-800">
-                Travela
-            </a>
-            <?php endif; ?>
+          
         </div>
 
         <div class="flex items-center space-x-6">

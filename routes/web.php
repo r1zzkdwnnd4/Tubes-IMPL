@@ -20,6 +20,9 @@ use App\Http\Controllers\Auth\AdminLaporanController;
 
 // AGEN
 use App\Http\Controllers\Auth\AgenAuthController;
+use App\Http\Controllers\Auth\AgenDashboardController;
+use App\Http\Controllers\Auth\AgenPaketController;
+use App\Http\Controllers\Auth\AgenRiwayatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,9 +188,21 @@ Route::post('/agen/login', [AgenAuthController::class, 'login'])
 
 Route::middleware('auth:agen')->group(function () {
 
-    Route::get('/agen/dashboard', fn () => view('pages.agenDashboard'))
+    Route::get('/agen/dashboard', [AgenDashboardController::class, 'index'])
         ->name('agen.dashboard');
+
+    Route::get('/agen/paket', fn () => view('pages.agenPaket'))
+        ->name('agen.paket');
+
+    Route::get('/agen/riwayat', fn () => view('pages.agenRiwayat'))
+        ->name('agen.riwayat');
 
     Route::post('/agen/logout', [AgenAuthController::class, 'logout'])
         ->name('agen.logout');
+        
+    Route::get('/agen/paket', [AgenPaketController::class, 'index'])
+        ->name('agen.paket');
+        
+    Route::get('/agen/riwayat', [AgenRiwayatController::class, 'index'])
+        ->name('agen.riwayat');
 });
