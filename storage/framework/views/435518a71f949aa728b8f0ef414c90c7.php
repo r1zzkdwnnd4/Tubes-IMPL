@@ -44,11 +44,14 @@
     <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.03] transition duration-300">
 
         <!-- IMAGE -->
-        <img
-            src="<?php echo e(asset('images/' . ($wisata->Gambar ?? 'img1.jpg'))); ?>"
+       <img
+            src="<?php echo e($wisata->Gambar 
+            ? asset('uploads/wisata/' . $wisata->Gambar) 
+            : asset('images/img1.jpg')); ?>"
             alt="<?php echo e($wisata->NamaWisata); ?>"
             class="w-full h-64 object-cover"
         >
+
 
         <!-- CONTENT -->
         <div class="p-6">

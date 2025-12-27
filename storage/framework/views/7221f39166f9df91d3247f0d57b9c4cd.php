@@ -28,8 +28,8 @@
 
                 <img
                     src="<?php echo e($item->Gambar
-                                ? asset('storage/wisata/' . $item->Gambar)
-                                : asset('images/img1.jpg')); ?>"
+                    ? asset('uploads/wisata/' . $item->Gambar)
+                    : asset('images/img1.jpg')); ?>"
                     class="w-full h-64 object-cover"
                     alt="<?php echo e($item->NamaWisata); ?>">
 
