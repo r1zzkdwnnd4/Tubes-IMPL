@@ -54,7 +54,8 @@
 
         <!-- CONTENT -->
         <div class="p-6">
-            <a href="{{ route('wisata.detail', $wisata->id) }}">
+            <a href="{{ route('wisata.detail', ['id' => $wisata->Id_wisata]) }}">
+
                 <h4 class="text-2xl font-bold mb-2 hover:underline">
                     {{ $wisata->NamaWisata }}
                 </h4>

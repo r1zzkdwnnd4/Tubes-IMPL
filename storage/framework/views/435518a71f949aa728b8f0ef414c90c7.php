@@ -55,10 +55,13 @@
 
         <!-- CONTENT -->
         <div class="p-6">
-            <h4 class="text-2xl font-bold mb-2">
-                <?php echo e($wisata->NamaWisata); ?>
+            <a href="<?php echo e(route('wisata.detail', ['id' => $wisata->Id_wisata])); ?>">
 
-            </h4>
+                <h4 class="text-2xl font-bold mb-2 hover:underline">
+                    <?php echo e($wisata->NamaWisata); ?>
+
+                </h4>
+            </a>
 
             <p class="text-gray-500 mb-3">
                 <?php echo e($wisata->Area); ?>
