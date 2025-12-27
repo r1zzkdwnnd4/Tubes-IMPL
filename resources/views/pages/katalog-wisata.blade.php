@@ -54,9 +54,11 @@
 
         <!-- CONTENT -->
         <div class="p-6">
-            <h4 class="text-2xl font-bold mb-2">
-                {{ $wisata->NamaWisata }}
-            </h4>
+            <a href="{{ route('wisata.detail', $wisata->id) }}">
+                <h4 class="text-2xl font-bold mb-2 hover:underline">
+                    {{ $wisata->NamaWisata }}
+                </h4>
+            </a>
 
             <p class="text-gray-500 mb-3">
                 {{ $wisata->Area }}

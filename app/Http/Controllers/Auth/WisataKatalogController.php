@@ -16,4 +16,12 @@ class WisataKatalogController extends Controller
 
         return view('pages.katalog-wisata', compact('wisataPerArea'));
     }
+
+    public function show($id)
+    {
+        $wisata = Wisata::findOrFail($id);
+
+        return view('pages.detail-wisata', compact('wisata'));
+    }
+
 }

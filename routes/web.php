@@ -99,6 +99,8 @@ Route::get('/wisata/katalog', function () {
 Route::get('/wisata/katalog', [WisataKatalogController::class, 'index'])
     ->name('wisata.katalog');
 
+Route::get('/wisata/{id}', [WisataKatalogController::class, 'show'])
+    ->name('wisata.detail');
 
 
 /*
