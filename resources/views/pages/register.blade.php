@@ -45,7 +45,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Nama</label>
-                <input type="text" name="NamaCus" class="form-control" placeholder="Nama Lengkap">
+                <input type="text" name="NamaCustomer" class="form-control" placeholder="Nama Lengkap">
             </div>
 
             <div class="mb-3">

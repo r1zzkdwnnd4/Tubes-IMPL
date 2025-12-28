@@ -26,7 +26,7 @@ class CustomerAuthController extends Controller
         ]);
 
         Customer::create([
-            'NamaCustomer' => $request->NamaCus,
+            'NamaCustomer' => $request->NamaCustomer,
             'Email'        => $request->Email,
             'Password'     => Hash::make($request->Password),
             'Alamat'       => $request->Alamat,

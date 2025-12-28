@@ -22,10 +22,10 @@ class AdminWisataController extends Controller
             'nama_wisata' => 'required|string|max:120',
             'area'        => 'required|string|max:100',
             'harga'       => 'required|numeric',
+            'deskripsi'   => 'nullable|string',
             'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        // ===== UPLOAD GAMBAR (OPSIONAL) =====
         $namaGambar = null;
 
         if ($request->hasFile('gambar')) {
@@ -36,8 +36,9 @@ class AdminWisataController extends Controller
 
         Wisata::create([
             'NamaWisata' => $request->nama_wisata,
-            'Area'       => ucwords(strtolower(trim($request->area))), // NORMALISASI AREA
+            'Area'       => ucwords(strtolower(trim($request->area))),
             'Harga'      => $request->harga,
+            'Deskripsi'  => $request->deskripsi,
             'Gambar'     => $namaGambar
         ]);
 
@@ -53,16 +54,15 @@ class AdminWisataController extends Controller
             'nama_wisata' => 'required|string|max:120',
             'area'        => 'required|string|max:100',
             'harga'       => 'required|numeric',
+            'deskripsi'   => 'nullable|string',
             'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
         $wisata = Wisata::where('Id_wisata', $id)->firstOrFail();
 
-        // ===== JIKA ADA GAMBAR BARU =====
         if ($request->hasFile('gambar')) {
-            // hapus gambar lama (jika ada)
-            if ($wisata->Gambar && file_exists(public_path('uploads/wisata/'.$wisata->Gambar))) {
-                unlink(public_path('uploads/wisata/'.$wisata->Gambar));
+            if ($wisata->Gambar && file_exists(public_path('uploads/wisata/' . $wisata->Gambar))) {
+                unlink(public_path('uploads/wisata/' . $wisata->Gambar));
             }
 
             $file = $request->file('gambar');
@@ -74,8 +74,9 @@ class AdminWisataController extends Controller
 
         $wisata->update([
             'NamaWisata' => $request->nama_wisata,
-            'Area'       => ucwords(strtolower(trim($request->area))), // NORMALISASI AREA
-            'Harga'      => $request->harga
+            'Area'       => ucwords(strtolower(trim($request->area))),
+            'Harga'      => $request->harga,
+            'Deskripsi'  => $request->deskripsi
         ]);
 
         return redirect()
@@ -88,8 +89,8 @@ class AdminWisataController extends Controller
     {
         $wisata = Wisata::where('Id_wisata', $id)->first();
 
-        if ($wisata && $wisata->Gambar && file_exists(public_path('uploads/wisata/'.$wisata->Gambar))) {
-            unlink(public_path('uploads/wisata/'.$wisata->Gambar));
+        if ($wisata && $wisata->Gambar && file_exists(public_path('uploads/wisata/' . $wisata->Gambar))) {
+            unlink(public_path('uploads/wisata/' . $wisata->Gambar));
         }
 
         Wisata::where('Id_wisata', $id)->delete();
