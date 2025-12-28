@@ -310,8 +310,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
-            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
         ),
         'Spatie\\Ignition\\' => 
         array (
@@ -352,8 +352,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -385,8 +385,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/utils/src',
-            1 => __DIR__ . '/..' . '/nette/schema/src',
+            0 => __DIR__ . '/..' . '/nette/schema/src',
+            1 => __DIR__ . '/..' . '/nette/utils/src',
         ),
         'Monolog\\' => 
         array (
@@ -534,6 +534,16 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Auth\\AdminAgenController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminAgenController.php',
+        'App\\Http\\Controllers\\Auth\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminAuthController.php',
+        'App\\Http\\Controllers\\Auth\\AdminCustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminCustomerController.php',
+        'App\\Http\\Controllers\\Auth\\AdminDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminDashboardController.php',
+        'App\\Http\\Controllers\\Auth\\AdminTransaksiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminTransaksiController.php',
+        'App\\Http\\Controllers\\Auth\\AdminWisataController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminWisataController.php',
+        'App\\Http\\Controllers\\Auth\\AgenAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenAuthController.php',
+        'App\\Http\\Controllers\\Auth\\BookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/BookingController.php',
+        'App\\Http\\Controllers\\Auth\\CustomerAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/CustomerAuthController.php',
+        'App\\Http\\Controllers\\Auth\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PaymentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',

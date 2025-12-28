@@ -11,12 +11,14 @@
     </div>
 
     <div class="text-center max-w-7xl mx-auto px-4 lg:px-8">
-        <p class="text-sm font-semibold text-primary-blue mb-2 border-b border-primary-blue inline-block">
-            DESTINATION
-        </p>
-        <h3 class="text-4xl font-bold mb-12">Popular Destination</h3>
+    <p class="text-sm font-semibold text-primary-blue mb-2 border-b border-primary-blue inline-block">
+        DESTINATION
+    </p>
+    <h3 class="text-4xl font-bold mb-12">Popular Destination</h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- 🔍 SEARCH FORM -->
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
             <!-- Card 1 -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.03] transition">

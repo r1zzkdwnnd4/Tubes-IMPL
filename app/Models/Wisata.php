@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wisata extends Model
 {
+    protected $fillable = ['nama','deskripsi','lokasi','harga'];
     protected $table = 'Wisata';
     protected $primaryKey = 'Id_wisata';
     public $timestamps = false;

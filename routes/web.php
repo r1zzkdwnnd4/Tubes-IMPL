@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\AdminTransaksiController;
 use App\Http\Controllers\Auth\AdminWisataController;
 use App\Http\Controllers\Auth\AdminAgenController;
 use App\Http\Controllers\Auth\AdminDashboardController;
+use App\Http\Controllers\VirtualAccountController;
+use App\Http\Controllers\PembayaranController;
+
 
 
 
@@ -76,6 +79,24 @@ Route::middleware('auth:customer')->group(function () {
     Route::get('/customer/tiket/{kode_booking}', 
         [PaymentController::class, 'tiket']
     )->name('customer.tiket');
+
+     // =============================
+    // VIRTUAL ACCOUNT (TRANSFER BANK)
+    // =============================
+    Route::get('/transfer/{id_transaksi}', 
+        [VirtualAccountController::class, 'generate']
+    )->name('transfer.va');
+
+      // =============================
+    // KONFIRMASI PEMBAYARAN
+    // =============================
+    Route::get('/konfirmasi/{id_transaksi}', 
+        [PembayaranController::class, 'konfirmasi']
+    )->name('pembayaran.konfirmasi');
+
+    Route::post('/pembayaran/store', 
+        [PembayaranController::class, 'store']
+    )->name('pembayaran.store');
 });
 
 /*
@@ -160,5 +181,5 @@ Route::middleware('auth:agen')->group(function () {
         ->name('agen.dashboard');
 
     Route::post('/agen/logout', [AgenAuthController::class, 'logout'])
-        ->name('agen.logout');
+        ->name('agen.logout');  
 });
