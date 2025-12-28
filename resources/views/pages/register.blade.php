@@ -4,30 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travela - Registrasi</title>
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            min-height: 100vh;
+        }
+
+        .register-card {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            background: #ffffff;
+        }
+
+        .register-card h1 {
+            font-weight: 700;
+        }
+
+        .form-control {
+            padding: 12px 14px;
+        }
+
+        .btn-register {
+            padding: 12px;
+            font-weight: 600;
+            background-color: #1D4ED8;
+            border: none;
+        }
+
+        .btn-register:hover {
+            background-color: #1E40AF;
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 px-5">
-    <a class="navbar-brand ms-4" href="{{ route('home') }}"><h1>Travela</h1></a>
-    <div class="collapse navbar-collapse justify-content-end me-4" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item me-3">
-                <a class="btn btn-sign-in" href="{{ route('customer.login') }}">Sign In</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-sign-up" href="{{ route('customer.register') }}">Sign Up</a>
-            </li>
-        </ul>
+<!-- NAVBAR -->
+<nav class="navbar navbar-light bg-transparent py-4 px-5">
+    <a class="navbar-brand brand text-primary" href="{{ route('home') }}">Travela</a>
+
+    <div>
+        <a class="btn btn-outline-primary me-2" href="{{ route('customer.login') }}">Sign In</a>
+        <a class="btn btn-primary" href="{{ route('customer.register') }}">Sign Up</a>
     </div>
 </nav>
 
-<div class="register-container">
-    <div class="register-box">
+<!-- REGISTER FORM -->
+<div class="d-flex align-items-center justify-content-center px-3" style="min-height: calc(100vh - 120px);">
+    <div class="register-card p-4 p-md-5">
 
-        <p>Sudah punya akun? <a href="{{ route('customer.login') }}" class="text-muted">Masuk</a></p>
-        <h1>Registrasi</h1>
+        
+        <h1 class="mb-4">Registrasi</h1>
 
         {{-- ERROR ALERT --}}
         @if ($errors->any())
@@ -44,32 +84,41 @@
             @csrf
 
             <div class="mb-3">
-                <label class="form-label">Nama</label>
-                <input type="text" name="NamaCustomer" class="form-control" placeholder="Nama Lengkap">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" name="NamaCustomer" class="form-control" placeholder="Masukkan nama lengkap">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" name="Email" class="form-control" placeholder="Email">
+                <input type="email" name="Email" class="form-control" placeholder="nama@email.com">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" name="Password" class="form-control" placeholder="Password">
+                <input type="password" name="Password" class="form-control" placeholder="Buat password">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Alamat</label>
-                <input type="text" name="Alamat" class="form-control" placeholder="Alamat">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">No HP</label>
-                <input type="text" name="NoHP" class="form-control" placeholder="Nomor HP">
+                <input type="text" name="Alamat" class="form-control" placeholder="Alamat tempat tinggal">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-2">Daftar</button>
+            <div class="mb-4">
+                <label class="form-label">No HP</label>
+                <input type="text" name="NoHP" class="form-control" placeholder="08xxxxxxxxxx">
+            </div>
+
+            <button type="submit" class="btn btn-register text-white w-100 mb-3">
+                Daftar
+            </button>
         </form>
 
+        <p class="text-center text-muted mb-0">
+            Sudah punya akun?
+            <a href="{{ route('customer.login') }}" class="text-primary fw-semibold text-decoration-none">
+                Masuk
+            </a>
+        </p>
     </div>
 </div>
 

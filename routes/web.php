@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\CustomerHomeController;
 use App\Http\Controllers\Auth\BookingController;
 use App\Http\Controllers\Auth\PaymentController;
 use App\Http\Controllers\Auth\WisataKatalogController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 // ADMIN
 use App\Http\Controllers\Auth\AdminAuthController;
@@ -50,6 +51,17 @@ Route::post('/customer/login', [CustomerAuthController::class, 'login'])
 
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])
     ->name('customer.logout');
+
+//reset password customer
+
+Route::get('/customer/reset-password', function () {
+    return view('pages.reset-password');
+})->name('customer.reset.form');
+
+Route::post('/customer/reset-password', 
+    [CustomerAuthController::class, 'resetPassword']
+)->name('customer.reset.process');
+
 
 /*
 |--------------------------------------------------------------------------
