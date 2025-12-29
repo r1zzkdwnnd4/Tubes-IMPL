@@ -69,7 +69,7 @@
                 Rp {{ number_format($wisata->Harga, 0, ',', '.') }} / orang
             </p>
 
-            <a href="{{ route('form.booking') }}"
+            <a href="{{ route('form.booking', ['wisata' => $wisata->Id_wisata]) }}"
                class="inline-block text-sm text-white bg-primary-blue px-4 py-2 rounded hover:bg-blue-700 transition">
                 Booking
             </a>

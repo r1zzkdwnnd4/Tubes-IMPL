@@ -13,11 +13,16 @@ class BookingController extends Controller
     /**
      * Tampilkan form booking
      */
-    public function create()
-    {
-        $wisata = Wisata::all();
-        return view('pages.form-booking', compact('wisata'));
-    }
+    public function create(Request $request)
+{
+    $wisata = Wisata::all();
+
+    // ambil wisata dari query (?wisata=ID)
+    $selectedWisata = $request->query('wisata');
+
+    return view('pages.form-booking', compact('wisata', 'selectedWisata'));
+}
+
 
     /**
      * Proses booking & redirect ke halaman pembayaran sesuai metode

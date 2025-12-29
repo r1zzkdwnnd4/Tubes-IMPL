@@ -89,7 +89,7 @@
     </div>
 
     {{-- CTA --}}
-    <a href="{{ route('form.booking') }}"
+    <a href="{{ route('form.booking', ['wisata' => $wisata->Id_wisata]) }}"
        class="block w-full text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-4 rounded-xl hover:opacity-90 transition">
         Booking Sekarang
     </a>

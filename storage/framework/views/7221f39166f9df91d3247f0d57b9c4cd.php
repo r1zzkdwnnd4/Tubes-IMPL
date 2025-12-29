@@ -54,7 +54,7 @@
                     </p>
 
                     <!-- BOOKING -->
-                    <a href="<?php echo e(route('form.booking')); ?>"
+                    <a href="<?php echo e(route('form.booking', ['wisata' => $item->Id_wisata])); ?>"
                         class="inline-block text-sm text-white bg-primary-blue px-4 py-2 rounded hover:bg-blue-700 transition">
                         Booking
                     </a>
