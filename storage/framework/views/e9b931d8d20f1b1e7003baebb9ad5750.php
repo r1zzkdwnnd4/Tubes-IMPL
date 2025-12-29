@@ -4,11 +4,9 @@
         
         <div class="flex items-center space-x-2">
             <i data-lucide="map-pin" class="text-primary-blue w-6 h-6"></i>
-            <a href="#hero"
-                class="text-xl font-bold text-gray-800">
+            <a href="#hero" class="text-xl font-bold text-gray-800">
                 Travela
             </a>
-          
         </div>
 
         <div class="flex items-center space-x-6">
@@ -16,66 +14,82 @@
             
             <?php if(Route::is('customer.home')): ?>
 
-            
+                <a href="#about" class="nav-link text-gray-600 hover:text-primary-blue">
+                    About
+                </a>
 
-            <a href="#about"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                About
-            </a>
+                <a href="#destination" class="nav-link text-gray-600 hover:text-primary-blue">
+                    Destination
+                </a>
 
-            <a href="#destination"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                Destination
-            </a>
+                <a href="#footer" class="nav-link text-gray-600 hover:text-primary-blue">
+                    Contact
+                </a>
 
-            <a href="#footer"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                Contact
-            </a>
-
-            
-            <a href="<?php echo e(route('wisata.katalog')); ?>"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Katalog
-            </a>
+                <a href="<?php echo e(route('wisata.katalog')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Katalog
+                </a>
 
             
             <?php elseif(Route::is('wisata.katalog')): ?>
 
-            <a href="<?php echo e(route('customer.home')); ?>"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Home
-            </a>
+                <a href="<?php echo e(route('customer.home')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Home
+                </a>
+
+            
+            <?php elseif(Route::is('customer.history')): ?>
+
+                <a href="<?php echo e(route('customer.home')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Home
+                </a>
+
+                <a href="<?php echo e(route('form.booking')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Booking
+                </a>
+
+                <a href="<?php echo e(route('wisata.katalog')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Katalog
+                </a>
 
             <?php endif; ?>
 
-            
             
             <?php if(auth()->guard('customer')->guest()): ?>
-            <a href="<?php echo e(route('customer.login')); ?>"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Login
-            </a>
+                <a href="<?php echo e(route('customer.login')); ?>"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Login
+                </a>
             <?php endif; ?>
 
-            
             <?php if(auth()->guard('customer')->check()): ?>
-            <a href="<?php echo e(route('form.booking')); ?>"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Book Now
-            </a>
+                <?php if (! (Route::is('customer.history'))): ?>
+                    <a href="<?php echo e(route('form.booking')); ?>"
+                       class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                        Book Now
+                    </a>
 
-            <form method="POST" action="<?php echo e(route('customer.logout')); ?>">
-                <?php echo csrf_field(); ?>
-                <button
-                    type="submit"
-                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                    Logout
-                </button>
-            </form>
+                    <a href="<?php echo e(route('customer.history')); ?>"
+                       class="nav-link text-gray-600 hover:text-primary-blue">
+                        History Reservasi
+                    </a>
+                <?php endif; ?>
+
+                <form method="POST" action="<?php echo e(route('customer.logout')); ?>">
+                    <?php echo csrf_field(); ?>
+                    <button type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                        Logout
+                    </button>
+                </form>
             <?php endif; ?>
-
 
         </div>
     </nav>
-</header><?php /**PATH C:\laragon\www\travelaa\resources\views/sections/header.blade.php ENDPATH**/ ?>
+</header>
+<?php /**PATH C:\laragon\www\travelaa\resources\views/sections/header.blade.php ENDPATH**/ ?>

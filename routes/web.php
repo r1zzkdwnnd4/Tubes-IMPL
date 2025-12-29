@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\BookingController;
 use App\Http\Controllers\Auth\PaymentController;
 use App\Http\Controllers\Auth\WisataKatalogController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\CustomerHistoryController;
 
 // ADMIN
 use App\Http\Controllers\Auth\AdminAuthController;
@@ -95,6 +96,11 @@ Route::middleware('auth:customer')->group(function () {
   Route::get('/customer/tiket', 
         [PaymentController::class, 'tiket']
     )->name('customer.tiket');
+
+    //history customer
+    Route::get('/customer/history', 
+        [CustomerHistoryController::class, 'index']
+    )->name('customer.history');
 });
 
 //metode pembayaran

@@ -4,11 +4,9 @@
         {{-- LOGO --}}
         <div class="flex items-center space-x-2">
             <i data-lucide="map-pin" class="text-primary-blue w-6 h-6"></i>
-            <a href="#hero"
-                class="text-xl font-bold text-gray-800">
+            <a href="#hero" class="text-xl font-bold text-gray-800">
                 Travela
             </a>
-          
         </div>
 
         <div class="flex items-center space-x-6">
@@ -16,65 +14,80 @@
             {{-- ================= CUSTOMER HOME ================= --}}
             @if(Route::is('customer.home'))
 
-            
+                <a href="#about" class="nav-link text-gray-600 hover:text-primary-blue">
+                    About
+                </a>
 
-            <a href="#about"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                About
-            </a>
+                <a href="#destination" class="nav-link text-gray-600 hover:text-primary-blue">
+                    Destination
+                </a>
 
-            <a href="#destination"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                Destination
-            </a>
+                <a href="#footer" class="nav-link text-gray-600 hover:text-primary-blue">
+                    Contact
+                </a>
 
-            <a href="#footer"
-                class="nav-link text-gray-600 hover:text-primary-blue py-2 px-3 rounded-lg hover:bg-gray-100">
-                Contact
-            </a>
-
-            {{-- KE KATALOG --}}
-            <a href="{{ route('wisata.katalog') }}"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Katalog
-            </a>
+                <a href="{{ route('wisata.katalog') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Katalog
+                </a>
 
             {{-- ================= KATALOG ================= --}}
             @elseif(Route::is('wisata.katalog'))
 
-            <a href="{{ route('customer.home') }}"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Home
-            </a>
+                <a href="{{ route('customer.home') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Home
+                </a>
+
+            {{-- ================= HISTORY RESERVASI ================= --}}
+            @elseif(Route::is('customer.history'))
+
+                <a href="{{ route('customer.home') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Home
+                </a>
+
+                <a href="{{ route('form.booking') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Booking
+                </a>
+
+                <a href="{{ route('wisata.katalog') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Katalog
+                </a>
 
             @endif
 
-            {{-- BOOK --}}
-            {{-- JIKA BELUM LOGIN --}}
+            {{-- ================= AUTH ================= --}}
             @guest('customer')
-            <a href="{{ route('customer.login') }}"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Login
-            </a>
+                <a href="{{ route('customer.login') }}"
+                   class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                    Login
+                </a>
             @endguest
 
-            {{-- JIKA SUDAH LOGIN --}}
             @auth('customer')
-            <a href="{{ route('form.booking') }}"
-                class="bg-primary-blue hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                Book Now
-            </a>
+                @unless(Route::is('customer.history'))
+                    <a href="{{ route('form.booking') }}"
+                       class="bg-primary-blue text-white px-4 py-2 rounded-lg">
+                        Book Now
+                    </a>
 
-            <form method="POST" action="{{ route('customer.logout') }}">
-                @csrf
-                <button
-                    type="submit"
-                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                    Logout
-                </button>
-            </form>
+                    <a href="{{ route('customer.history') }}"
+                       class="nav-link text-gray-600 hover:text-primary-blue">
+                        History Reservasi
+                    </a>
+                @endunless
+
+                <form method="POST" action="{{ route('customer.logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                        Logout
+                    </button>
+                </form>
             @endauth
-
 
         </div>
     </nav>
