@@ -39,7 +39,7 @@
                     Home
                 </a>
 
-            {{-- ================= HISTORY RESERVASI ================= --}}
+            {{-- ================= HISTORY PEMESANAN ================= --}}
             @elseif(Route::is('customer.history'))
 
                 <a href="{{ route('customer.home') }}"
@@ -75,8 +75,8 @@
                     </a>
 
                     <a href="{{ route('customer.history') }}"
-                       class="nav-link text-gray-600 hover:text-primary-blue">
-                        History Reservasi
+                       class="nav-link text-black-600 hover:text-primary-blue bg-yellow-300 px-4 py-2 rounded-lg">
+                        History Pemesanan
                     </a>
                 @endunless
 

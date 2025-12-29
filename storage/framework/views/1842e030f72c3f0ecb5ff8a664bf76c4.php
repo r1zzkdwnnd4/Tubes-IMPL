@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>History Reservasi</title>
+    <title>History Pemesanan</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -30,13 +30,14 @@
 
     <?php echo $__env->make('sections.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    <div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="max-w-6xl mx-auto px-6 pt-32">
 
-        <h1 class="text-3xl font-bold mb-8">History Reservasi</h1>
+
+        <h1 class="text-3xl font-bold mb-8">History Pemesanan</h1>
 
         <?php if($transaksi->isEmpty()): ?>
         <div class="bg-white p-6 rounded-lg shadow text-center text-gray-500">
-            Belum ada reservasi.
+            Belum ada pemesanan.
         </div>
         <?php else: ?>
         <div class="bg-white rounded-xl shadow overflow-hidden">

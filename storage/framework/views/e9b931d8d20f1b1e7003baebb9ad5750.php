@@ -75,8 +75,8 @@
                     </a>
 
                     <a href="<?php echo e(route('customer.history')); ?>"
-                       class="nav-link text-gray-600 hover:text-primary-blue">
-                        History Reservasi
+                       class="nav-link text-black-600 hover:text-primary-blue bg-yellow-300 px-4 py-2 rounded-lg">
+                        History Pemesanan
                     </a>
                 <?php endif; ?>
 
