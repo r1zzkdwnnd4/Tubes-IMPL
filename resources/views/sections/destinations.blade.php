@@ -26,17 +26,22 @@
 
             <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.03] transition">
 
+                <!-- IMAGE (TIDAK DIKLIK) -->
                 <img
                     src="{{ $item->Gambar
-                    ? asset('uploads/wisata/' . $item->Gambar)
-                    : asset('images/img1.jpg') }}"
+            ? asset('uploads/wisata/' . $item->Gambar)
+            : asset('images/img1.jpg') }}"
                     class="w-full h-64 object-cover"
                     alt="{{ $item->NamaWisata }}">
 
                 <div class="p-6 text-left">
-                    <h4 class="text-2xl font-bold mb-1">
-                        {{ $item->NamaWisata }}
-                    </h4>
+
+                    <!-- NAMA WISATA (KLIK KE DETAIL) -->
+                    <a href="{{ route('wisata.detail', ['id' => $item->Id_wisata]) }}">
+                        <h4 class="text-2xl font-bold mb-1 hover:underline">
+                            {{ $item->NamaWisata }}
+                        </h4>
+                    </a>
 
                     <p class="text-gray-500 mb-2">
                         {{ $item->Area }}
@@ -46,12 +51,15 @@
                         Rp {{ number_format($item->Harga, 0, ',', '.') }} / orang
                     </p>
 
+                    <!-- BOOKING -->
                     <a href="{{ route('form.booking') }}"
                         class="inline-block text-sm text-white bg-primary-blue px-4 py-2 rounded hover:bg-blue-700 transition">
                         Booking
                     </a>
+
                 </div>
             </div>
+
             @empty
             <p class="col-span-3 text-center text-gray-500">
                 Belum ada data wisata.

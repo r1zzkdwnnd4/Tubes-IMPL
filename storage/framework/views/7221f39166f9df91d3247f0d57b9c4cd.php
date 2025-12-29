@@ -22,43 +22,52 @@
             $wisataList = $wisata ?? collect();
             ?>
 
-            <?php $__empty_1 = true; $__currentLoopData = $wisataList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+           <?php $__empty_1 = true; $__currentLoopData = $wisataList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.03] transition">
+<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:scale-[1.03] transition">
 
-                <img
-                    src="<?php echo e($item->Gambar
-                    ? asset('uploads/wisata/' . $item->Gambar)
-                    : asset('images/img1.jpg')); ?>"
-                    class="w-full h-64 object-cover"
-                    alt="<?php echo e($item->NamaWisata); ?>">
+    <!-- IMAGE (TIDAK DIKLIK) -->
+    <img
+        src="<?php echo e($item->Gambar
+            ? asset('uploads/wisata/' . $item->Gambar)
+            : asset('images/img1.jpg')); ?>"
+        class="w-full h-64 object-cover"
+        alt="<?php echo e($item->NamaWisata); ?>"
+    >
 
-                <div class="p-6 text-left">
-                    <h4 class="text-2xl font-bold mb-1">
-                        <?php echo e($item->NamaWisata); ?>
+    <div class="p-6 text-left">
 
-                    </h4>
+        <!-- NAMA WISATA (KLIK KE DETAIL) -->
+        <a href="<?php echo e(route('wisata.detail', ['id' => $item->Id_wisata])); ?>">
+            <h4 class="text-2xl font-bold mb-1 hover:underline">
+                <?php echo e($item->NamaWisata); ?>
 
-                    <p class="text-gray-500 mb-2">
-                        <?php echo e($item->Area); ?>
+            </h4>
+        </a>
 
-                    </p>
+        <p class="text-gray-500 mb-2">
+            <?php echo e($item->Area); ?>
 
-                    <p class="font-semibold text-primary-blue mb-4">
-                        Rp <?php echo e(number_format($item->Harga, 0, ',', '.')); ?> / orang
-                    </p>
+        </p>
 
-                    <a href="<?php echo e(route('form.booking')); ?>"
-                        class="inline-block text-sm text-white bg-primary-blue px-4 py-2 rounded hover:bg-blue-700 transition">
-                        Booking
-                    </a>
-                </div>
-            </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-            <p class="col-span-3 text-center text-gray-500">
-                Belum ada data wisata.
-            </p>
-            <?php endif; ?>
+        <p class="font-semibold text-primary-blue mb-4">
+            Rp <?php echo e(number_format($item->Harga, 0, ',', '.')); ?> / orang
+        </p>
+
+        <!-- BOOKING -->
+        <a href="<?php echo e(route('form.booking')); ?>"
+            class="inline-block text-sm text-white bg-primary-blue px-4 py-2 rounded hover:bg-blue-700 transition">
+            Booking
+        </a>
+
+    </div>
+</div>
+
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+<p class="col-span-3 text-center text-gray-500">
+    Belum ada data wisata.
+</p>
+<?php endif; ?>
 
         </div>
 
