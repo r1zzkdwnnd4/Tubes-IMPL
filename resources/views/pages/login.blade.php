@@ -94,7 +94,7 @@
                 </div>
             </div>
            
-            <a href="{{ route('customer.reset.form') }}" class="text-primary fw-semibold text-decoration-none mb-4 d-block">
+            <a href="{{ route('customer.reset.form') }}" class="text-primary fw-semibold text-decoration-none mb-4 d-block ">
                 Lupa Sandi?
             </a>
         
