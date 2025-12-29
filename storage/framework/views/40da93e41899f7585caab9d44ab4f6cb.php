@@ -72,7 +72,7 @@
         <h1>Pembayaran Berhasil!</h1>
         <p>Terima kasih telah melakukan pembayaran. Tiket Anda telah dikonfirmasi.</p>
         <div>
-            <a href="<?php echo e(route('customer.tiket', $kodeBooking)); ?>" class="btn btn-ticket">
+            <a href="<?php echo e(route('customer.tiket')); ?>" class="btn btn-ticket">
                 Lihat Tiket
             </a>
         </div>

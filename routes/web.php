@@ -92,10 +92,23 @@ Route::middleware('auth:customer')->group(function () {
         ->name('konfirmasi.pembayaran');
 
     // TIKET (PAKAI KODE BOOKING)
-    Route::get('/customer/tiket/{kode_booking}', 
+  Route::get('/customer/tiket', 
         [PaymentController::class, 'tiket']
     )->name('customer.tiket');
 });
+
+//metode pembayaran
+Route::get('/pembayaran/kartu-kredit', function () {
+    return view('pages.pembayaran-kartu-kredit');
+})->name('pembayaran.kartu-kredit');
+
+Route::get('/pembayaran/paypal', function () {
+    return view('pages.pembayaran-paypal');
+})->name('pembayaran.paypal');
+
+Route::get('/pembayaran/transfer-bank', function () {
+    return view('pages.pembayaran-transfer-bank');
+})->name('pembayaran.transfer-bank');
 
 /*
 |--------------------------------------------------------------------------

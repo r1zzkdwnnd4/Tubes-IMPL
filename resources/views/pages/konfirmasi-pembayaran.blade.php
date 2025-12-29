@@ -72,7 +72,7 @@
         <h1>Pembayaran Berhasil!</h1>
         <p>Terima kasih telah melakukan pembayaran. Tiket Anda telah dikonfirmasi.</p>
         <div>
-            <a href="{{ route('customer.tiket', $kodeBooking) }}" class="btn btn-ticket">
+            <a href="{{ route('customer.tiket') }}" class="btn btn-ticket">
                 Lihat Tiket
             </a>
         </div>

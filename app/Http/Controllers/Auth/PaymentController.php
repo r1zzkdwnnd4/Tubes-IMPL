@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    /**
+     * Halaman payment (ringkasan transaksi)
+     */
     public function show()
     {
-        // Ambil transaksi_id dari session
         $transaksiId = session('transaksi_id');
 
         if (!$transaksiId) {
@@ -18,49 +20,59 @@ class PaymentController extends Controller
                 ->with('error', 'Transaksi tidak ditemukan.');
         }
 
-        // Ambil data transaksi + relasi
         $transaksi = Transaksi::with(['customer', 'wisata'])
             ->findOrFail($transaksiId);
 
-        // Kirim ke view
         return view('pages.payment', compact('transaksi'));
     }
 
+    /**
+     * Halaman konfirmasi pembayaran (formalitas)
+     */
     public function konfirmasi()
-{
-    $transaksiId = session('transaksi_id');
+    {
+        $transaksiId = session('transaksi_id');
 
-    if (!$transaksiId) {
-        return redirect()->route('customer.home')
-            ->with('error', 'Transaksi tidak ditemukan.');
+        if (!$transaksiId) {
+            return redirect()->route('customer.home')
+                ->with('error', 'Transaksi tidak ditemukan.');
+        }
+
+        // update status saja (dummy)
+        Transaksi::where('Id_transaksi', $transaksiId)
+            ->update([
+                'Status' => 'Paid'
+            ]);
+
+        return view('pages.konfirmasi-pembayaran');
     }
 
-    $transaksi = Transaksi::findOrFail($transaksiId);
+    /**
+     * HALAMAN TIKET
+     * - generate kode booking DI SINI
+     * - tanpa parameter route
+     */
+    public function tiket()
+    {
+        $transaksiId = session('transaksi_id');
 
-    // update status & pastikan kode booking ada
-    if (!$transaksi->Kode_Booking) {
-        $transaksi->update([
-            'Status' => 'Paid',
-            'Kode_Booking' => 'BOOK-' . strtoupper(uniqid())
-        ]);
-    } else {
-        $transaksi->update([
-            'Status' => 'Paid'
+        if (!$transaksiId) {
+            return redirect()->route('customer.home')
+                ->with('error', 'Transaksi tidak ditemukan.');
+        }
+
+        $transaksi = Transaksi::with(['customer', 'wisata'])
+            ->findOrFail($transaksiId);
+
+        // JIKA KODE BOOKING BELUM ADA → GENERATE
+        if (!$transaksi->Kode_Booking) {
+            $transaksi->Kode_Booking = 'TRV-' . strtoupper(substr(uniqid(), -8));
+            $transaksi->save();
+        }
+
+        return view('pages.tiket', [
+            'transaksi'   => $transaksi,
+            'kodeBooking' => $transaksi->Kode_Booking
         ]);
     }
-
-    return view('pages.konfirmasi-pembayaran', [
-        'kodeBooking' => $transaksi->Kode_Booking
-    ]);
-}
-
-public function tiket($kode_booking)
-{
-    $transaksi = Transaksi::with(['customer', 'wisata'])
-        ->where('Kode_Booking', $kode_booking)
-        ->firstOrFail();
-
-    return view('pages.tiket', compact('transaksi'));
-}
-
 }
