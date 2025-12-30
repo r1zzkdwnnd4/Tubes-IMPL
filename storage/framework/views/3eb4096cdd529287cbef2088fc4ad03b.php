@@ -12,7 +12,7 @@
 
     <main class="flex-1 p-8">
 
-        {{-- HEADER --}}
+        
         <div class="flex justify-between items-center mb-10">
             <div>
                 <h1 class="text-3xl font-bold text-slate-800">
@@ -24,10 +24,10 @@
             </div>
         </div>
 
-        {{-- SUMMARY CARDS --}}
+        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
 
-            {{-- Transaksi --}}
+            
             <div class="bg-white p-6 rounded-2xl shadow-sm border hover:shadow-md transition">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-blue-100 text-blue-600 rounded-xl">
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            {{-- Pelanggan --}}
+            
             <div class="bg-white p-6 rounded-2xl shadow-sm border hover:shadow-md transition">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl">
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            {{-- Agen --}}
+            
             <div class="bg-white p-6 rounded-2xl shadow-sm border hover:shadow-md transition">
                 <div class="flex items-center gap-4">
                     <div class="p-3 bg-purple-100 text-purple-600 rounded-xl">
@@ -80,7 +80,7 @@
 
         </div>
 
-        {{-- QUICK ACCESS --}}
+        
         <div class="bg-white p-8 rounded-2xl shadow-sm border">
 
             <h2 class="text-xl font-semibold text-slate-800 mb-6">
@@ -89,8 +89,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                {{-- Transaksi --}}
-                <a href="{{ route('manager.laporan.transaksi') }}"
+                
+                <a href="<?php echo e(route('manager.laporan.transaksi')); ?>"
                    class="group p-6 rounded-xl border hover:border-blue-500 hover:bg-blue-50 transition">
 
                     <div class="flex items-center justify-between">
@@ -108,8 +108,8 @@
                     </div>
                 </a>
 
-                {{-- Pelanggan --}}
-                <a href="{{ route('manager.laporan.pelanggan') }}"
+                
+                <a href="<?php echo e(route('manager.laporan.pelanggan')); ?>"
                    class="group p-6 rounded-xl border hover:border-emerald-500 hover:bg-emerald-50 transition">
 
                     <div class="flex items-center justify-between">
@@ -127,8 +127,8 @@
                     </div>
                 </a>
 
-                {{-- Agen --}}
-                <a href="{{ route('manager.laporan.agen') }}"
+                
+                <a href="<?php echo e(route('manager.laporan.agen')); ?>"
                    class="group p-6 rounded-xl border hover:border-purple-500 hover:bg-purple-50 transition">
 
                     <div class="flex items-center justify-between">
@@ -154,3 +154,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\laragon\www\travela\resources\views/pages/dashboard.blade.php ENDPATH**/ ?>

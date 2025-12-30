@@ -210,6 +210,37 @@ Route::middleware(['auth:admin', 'block.manager'])->group(function () {
         ->name('admin.laporan.agen');
 });
 
+
+Route::middleware(['auth:admin', 'only.manager'])->group(function () {
+
+    Route::get('/manager/dashboard', function () {
+        return view('pages.dashboard'); // dashboard manager
+    })->name('manager.dashboard');
+
+});
+
+Route::middleware(['auth:admin'])->group(function () {
+
+    Route::get('/manager/dashboard', function () {
+        abort_if(auth('admin')->user()->Departemen !== 'Manager', 403);
+        return view('pages.dashboard');
+    })->name('manager.dashboard');
+
+    Route::get('/manager/laporan/transaksi',
+        [AdminLaporanController::class, 'laporanTransaksi']
+    )->name('manager.laporan.transaksi');
+
+    Route::get('/manager/laporan/pelanggan',
+        [AdminLaporanController::class, 'laporanPelanggan']
+    )->name('manager.laporan.pelanggan');
+
+    Route::get('/manager/laporan/agen',
+        [AdminLaporanController::class, 'laporanAgen']
+    )->name('manager.laporan.agen');
+});
+
+
+
 /*
 |--------------------------------------------------------------------------
 | AGEN AUTH
