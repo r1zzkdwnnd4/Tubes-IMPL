@@ -1,72 +1,70 @@
-# [Travela - Web Pemesanan Wisata]
+# 🌍 Travela — Web Pemesanan Wisata
 
-## Deskripsi
-Travela adalah aplikasi web berbasis Laravel yang digunakan untuk melakukan
-pemesanan tiket wisata secara online. Aplikasi ini memiliki fitur booking,
-manajemen destinasi wisata, dan riwayat transaksi.
+Travela adalah aplikasi web berbasis **Laravel** yang digunakan untuk melakukan
+pemesanan tiket wisata secara online. Aplikasi ini dirancang untuk memudahkan
+customer dalam memesan wisata, agen dalam mengelola pemesanan berdasarkan area,
+serta admin dalam mengelola data dan laporan transaksi.
 
 ---
 
-## Fitur Aplikasi
+## ✨ Fitur Aplikasi
 
-Aplikasi ini memiliki tiga aktor utama, yaitu **Customer**, **Agen**, dan **Admin**.  
+Aplikasi ini memiliki tiga aktor utama, yaitu **Customer**, **Agen**, dan **Admin**.
 Setiap aktor memiliki hak akses dan fitur yang berbeda sesuai dengan perannya.
 
-### 1. Customer
-Customer merupakan pengguna yang melakukan pemesanan wisata. Fitur yang tersedia untuk customer antara lain:
+### 👤 Customer
+Customer merupakan pengguna yang melakukan pemesanan wisata.
 
+Fitur yang tersedia:
 - Registrasi akun
 - Login ke sistem
 - Reset password
-- Melihat halaman Home
-- Melihat daftar wisata dalam katalog
+- Mengakses halaman Home
+- Melihat daftar wisata pada katalog
 - Melakukan pemesanan wisata
 - Melihat riwayat pemesanan (history)
 - Melihat status pemesanan:
-  - Pending
-  - Dikonfirmasi
-  - Ditolak
+  - 🟡 Pending
+  - 🟢 Dikonfirmasi
+  - 🔴 Ditolak
 
 ---
 
-### 2. Agen
-Agen bertugas menangani pemesanan wisata berdasarkan area tertentu (kota).  
+### 🧭 Agen
+Agen bertugas menangani pemesanan wisata berdasarkan **area (kota)** tertentu.
 Setiap agen hanya dapat mengelola wisata yang berada dalam area penugasannya.
 
-Fitur yang tersedia untuk agen:
-
+Fitur yang tersedia:
 - Login ke sistem
-- Melihat daftar pemesanan dari customer sesuai area agen
-- Mengelola pemesanan wisata pada area yang ditugaskan
-- Mengubah status pemesanan customer menjadi:
-  - Dikonfirmasi
-  - Ditolak
+- Melihat daftar pemesanan customer sesuai area agen
+- Mengelola pemesanan wisata
+- Mengubah status pemesanan menjadi:
+  - 🟢 Dikonfirmasi
+  - 🔴 Ditolak
 
 ---
 
-### 3. Admin
+### 🛠️ Admin
 Admin bertugas mengelola data utama dalam sistem.
 
-Fitur yang tersedia untuk admin:
-
+Fitur yang tersedia:
 - Login ke sistem
-- Menambahkan data agen
+- Menambahkan dan mengelola data agen
 - Mengelola dan mengedit data customer
 - Menambahkan data wisata
 
 ---
 
-### 4. Admin Manager
-Admin Manager memiliki hak akses untuk melihat laporan transaksi dalam sistem.
+### 📊 Admin Manager
+Admin Manager memiliki akses khusus untuk memantau aktivitas transaksi.
 
-Fitur yang tersedia untuk admin manager:
-
+Fitur yang tersedia:
 - Login ke sistem
 - Melihat laporan transaksi pemesanan wisata
 
 ---
 
-## Teknologi yang Digunakan
+## 🧰 Teknologi yang Digunakan
 - Laravel
 - PHP
 - MySQL
@@ -75,7 +73,7 @@ Fitur yang tersedia untuk admin manager:
 
 ---
 
-## Panduan Instalasi
+## 💻 Panduan Instalasi
 
 1. Clone repository
 ```bash
