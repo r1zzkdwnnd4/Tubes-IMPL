@@ -77,7 +77,7 @@ Fitur yang tersedia:
 
 1. Clone repository
 ```bash
-git clone https://github.com/username/nama-repository.git
+git clone https://github.com/r1zzkdwnnd4/Tubes-IMPL.git
 ```
 ---
 
@@ -107,7 +107,7 @@ php artisan key:generate
 
 10. konfigurasi database di file env
 ```bash
- DB_DATABASE=nama_database
+ DB_DATABASE=travela
  DB_USERNAME=root
  DB_PASSWORD=
 ```
