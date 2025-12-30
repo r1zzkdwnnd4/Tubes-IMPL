@@ -13,14 +13,19 @@ class BookingController extends Controller
     /**
      * Tampilkan form booking
      */
-    public function create()
-    {
-        $wisata = Wisata::all();
-        return view('pages.form-booking', compact('wisata'));
-    }
+    public function create(Request $request)
+{
+    $wisata = Wisata::all();
+
+    // ambil wisata dari query (?wisata=ID)
+    $selectedWisata = $request->query('wisata');
+
+    return view('pages.form-booking', compact('wisata', 'selectedWisata'));
+}
+
 
     /**
-     * Simpan data booking ke tabel Transaksi
+     * Proses booking & redirect ke halaman pembayaran sesuai metode
      */
     public function store(Request $request)
     {
@@ -34,13 +39,10 @@ class BookingController extends Controller
         $customer = Auth::guard('customer')->user();
         $wisata   = Wisata::findOrFail($request->Id_wisata);
 
-        // Hitung total harga
+        // hitung total (walau dummy, tetap realistis)
         $total = $wisata->Harga * $request->JumlahOrang;
 
-        // Generate kode booking
-        $kodeBooking = 'TRV-' . strtoupper(uniqid());
-
-        // Simpan transaksi (SESUAI MODEL TRANSAKSI KAMU)
+        // simpan transaksi (tetap oke untuk histori / tiket)
         $transaksi = Transaksi::create([
             'Id_cust'           => $customer->Id_cust,
             'Id_wisata'         => $wisata->Id_wisata,
@@ -48,15 +50,32 @@ class BookingController extends Controller
             'Tanggal_Travel'    => $request->Tanggal,
             'Metode_Pembayaran' => $request->MetodePembayaran,
             'Total'             => $total,
-            'Status'            => 'Menunggu Pembayaran',
-            'Kode_Booking'      => $kodeBooking,
+            'Status'            => 'Pending',
+            'Kode_Booking'      => 'TRV-' . strtoupper(uniqid()),
         ]);
 
-        // Simpan ID transaksi ke session (dipakai di payment & tiket)
-        session(['transaksi_id' => $transaksi->Id_transaksi]);
+        // simpan id transaksi ke session (optional, buat histori / tiket)
+        session([
+            'transaksi_id' => $transaksi->Id_transaksi,
+            'kode_booking' => $transaksi->Kode_Booking
+        ]);
 
-       
 
-        return redirect()->route('customer.payment');
+        // =============================
+        // REDIRECT SESUAI METODE
+        // =============================
+        switch ($request->MetodePembayaran) {
+            case 'Transfer Bank':
+                return redirect()->route('pembayaran.transfer-bank');
+
+            case 'Kartu Kredit':
+                return redirect()->route('pembayaran.kartu-kredit');
+
+            case 'Paypal':
+                return redirect()->route('pembayaran.paypal');
+
+            default:
+                return redirect()->route('konfirmasi.pembayaran');
+        }
     }
 }

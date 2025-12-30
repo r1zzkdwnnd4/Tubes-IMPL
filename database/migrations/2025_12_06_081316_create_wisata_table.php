@@ -10,7 +10,9 @@ return new class extends Migration {
         Schema::create('Wisata', function (Blueprint $table) {
             $table->increments('Id_wisata');
             $table->string('NamaWisata', 120);
-            $table->string('Area', 100);
+            $table->string('Area', 100); // Bandung, Bali, dll
+            $table->text('Deskripsi')->nullable();
+            $table->string('Gambar')->nullable(); // simpan nama file / path
             $table->decimal('Harga', 12, 2);
         });
     }

@@ -4,23 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Wisata;
 
 class AdminWisataController extends Controller
 {
     // ===================== READ =====================
     public function index()
     {
-        $wisata = DB::table('wisata')
-            ->select(
-                'id_wisata',
-                'NamaWisata',
-                'Area',
-                'Harga'
-            )
-            ->orderByDesc('id_wisata')
-            ->get();
-
+        $wisata = Wisata::orderByDesc('Id_wisata')->get();
         return view('pages.adminManajemenWisata', compact('wisata'));
     }
 
@@ -30,13 +21,25 @@ class AdminWisataController extends Controller
         $request->validate([
             'nama_wisata' => 'required|string|max:120',
             'area'        => 'required|string|max:100',
-            'harga'       => 'required|numeric'
+            'harga'       => 'required|numeric',
+            'deskripsi'   => 'nullable|string',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        DB::table('wisata')->insert([
+        $namaGambar = null;
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $namaGambar = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/wisata'), $namaGambar);
+        }
+
+        Wisata::create([
             'NamaWisata' => $request->nama_wisata,
-            'Area'       => $request->area,
-            'Harga'      => $request->harga
+            'Area'       => ucwords(strtolower(trim($request->area))),
+            'Harga'      => $request->harga,
+            'Deskripsi'  => $request->deskripsi,
+            'Gambar'     => $namaGambar
         ]);
 
         return redirect()
@@ -50,16 +53,31 @@ class AdminWisataController extends Controller
         $request->validate([
             'nama_wisata' => 'required|string|max:120',
             'area'        => 'required|string|max:100',
-            'harga'       => 'required|numeric'
+            'harga'       => 'required|numeric',
+            'deskripsi'   => 'nullable|string',
+            'gambar'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        DB::table('wisata')
-            ->where('id_wisata', $id)
-            ->update([
-                'NamaWisata' => $request->nama_wisata,
-                'Area'       => $request->area,
-                'Harga'      => $request->harga
-            ]);
+        $wisata = Wisata::where('Id_wisata', $id)->firstOrFail();
+
+        if ($request->hasFile('gambar')) {
+            if ($wisata->Gambar && file_exists(public_path('uploads/wisata/' . $wisata->Gambar))) {
+                unlink(public_path('uploads/wisata/' . $wisata->Gambar));
+            }
+
+            $file = $request->file('gambar');
+            $namaGambar = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/wisata'), $namaGambar);
+
+            $wisata->Gambar = $namaGambar;
+        }
+
+        $wisata->update([
+            'NamaWisata' => $request->nama_wisata,
+            'Area'       => ucwords(strtolower(trim($request->area))),
+            'Harga'      => $request->harga,
+            'Deskripsi'  => $request->deskripsi
+        ]);
 
         return redirect()
             ->route('admin.wisata')
@@ -69,9 +87,13 @@ class AdminWisataController extends Controller
     // ===================== DELETE =====================
     public function destroy($id)
     {
-        DB::table('wisata')
-            ->where('id_wisata', $id)
-            ->delete();
+        $wisata = Wisata::where('Id_wisata', $id)->first();
+
+        if ($wisata && $wisata->Gambar && file_exists(public_path('uploads/wisata/' . $wisata->Gambar))) {
+            unlink(public_path('uploads/wisata/' . $wisata->Gambar));
+        }
+
+        Wisata::where('Id_wisata', $id)->delete();
 
         return redirect()
             ->route('admin.wisata')

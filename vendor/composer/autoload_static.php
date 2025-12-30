@@ -315,8 +315,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            1 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -352,8 +352,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -385,8 +385,8 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
         ),
         'Nette\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nette/utils/src',
-            1 => __DIR__ . '/..' . '/nette/schema/src',
+            0 => __DIR__ . '/..' . '/nette/schema/src',
+            1 => __DIR__ . '/..' . '/nette/utils/src',
         ),
         'Monolog\\' => 
         array (
@@ -534,11 +534,30 @@ class ComposerStaticInit13e1973cb0b99e63b830193274a5ccfe
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Auth\\AdminAgenController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminAgenController.php',
+        'App\\Http\\Controllers\\Auth\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminAuthController.php',
+        'App\\Http\\Controllers\\Auth\\AdminCustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminCustomerController.php',
+        'App\\Http\\Controllers\\Auth\\AdminDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminDashboardController.php',
+        'App\\Http\\Controllers\\Auth\\AdminLaporanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminLaporanController.php',
+        'App\\Http\\Controllers\\Auth\\AdminTransaksiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminTransaksiController.php',
+        'App\\Http\\Controllers\\Auth\\AdminWisataController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminWisataController.php',
+        'App\\Http\\Controllers\\Auth\\AgenAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenAuthController.php',
+        'App\\Http\\Controllers\\Auth\\AgenDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenDashboardController.php',
+        'App\\Http\\Controllers\\Auth\\AgenPaketController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenPaketController.php',
+        'App\\Http\\Controllers\\Auth\\AgenPesananController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenPesananController.php',
+        'App\\Http\\Controllers\\Auth\\AgenRiwayatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AgenRiwayatController.php',
+        'App\\Http\\Controllers\\Auth\\BookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/BookingController.php',
+        'App\\Http\\Controllers\\Auth\\CustomerAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/CustomerAuthController.php',
+        'App\\Http\\Controllers\\Auth\\CustomerHistoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/CustomerHistoryController.php',
+        'App\\Http\\Controllers\\Auth\\CustomerHomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/CustomerHomeController.php',
+        'App\\Http\\Controllers\\Auth\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PaymentController.php',
+        'App\\Http\\Controllers\\Auth\\WisataKatalogController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/WisataKatalogController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\AgenMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AgenMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\BlockManagerFromAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/BlockManagerFromAdmin.php',
         'App\\Http\\Middleware\\CustomerMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/CustomerMiddleware.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

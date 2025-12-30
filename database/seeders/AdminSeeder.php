@@ -21,6 +21,11 @@ class AdminSeeder extends Seeder
                 'Email'      => 'finance@travela.com',
                 'Password'   => Hash::make('finance123')
             ],
+            [
+                'departemen' => 'Manager',
+                'email' => 'manager@wisata.test',
+                'password' => Hash::make('password123'),
+            ],
         ]);
     }
 }

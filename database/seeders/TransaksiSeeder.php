@@ -17,7 +17,7 @@ class TransaksiSeeder extends Seeder
                 'Tanggal_Travel'     => '2025-12-10',
                 'Metode_Pembayaran'  => 'Transfer Bank',
                 'Total'              => 4500000,
-                'Status'             => 'menunggu',
+                'Status'             => 'Pending',
                 'Kode_Booking'       => 'BK-SEED-001',
             ],
             [
@@ -27,7 +27,7 @@ class TransaksiSeeder extends Seeder
                 'Tanggal_Travel'     => '2025-12-09',
                 'Metode_Pembayaran'  => 'Kartu Kredit',
                 'Total'              => 12000000,
-                'Status'             => 'menunggu',
+                'Status'             => 'Pending',
                 'Kode_Booking'       => 'BK-SEED-002',
             ],
             [
@@ -37,7 +37,7 @@ class TransaksiSeeder extends Seeder
                 'Tanggal_Travel'     => '2025-12-08',
                 'Metode_Pembayaran'  => 'E-Wallet',
                 'Total'              => 2800000,
-                'Status'             => 'menunggu',
+                'Status'             => 'Pending',
                 'Kode_Booking'       => 'BK-SEED-003',
             ],
         ]);
