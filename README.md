@@ -80,5 +80,65 @@ Fitur yang tersedia untuk admin manager:
 1. Clone repository
 ```bash
 git clone https://github.com/username/nama-repository.git
+```
+---
+
+2. Masuk ke Folder Proyek
+  ```bash
+  cd nama-repository
+```
+---
+   
+4. install dependency laravel
+  ```bash
+composer install
+```
+---
+   
+6. copy file environtment
+  ```bash
+cp .env.example .env
+```
+---
+   
+8. generate application key
+```bash
+php artisan key:generate
+```
+---
+
+10. konfigurasi database di file env
+```bash
+ DB_DATABASE=nama_database
+ DB_USERNAME=root
+ DB_PASSWORD=
+```
+---
+
+11. jalankan migration
+```bash
+php artisan migrate
+
+```
+---
+
+13. jalankan seeder (opsional)
+```bash
+php artisan db:seed
+```
+---
+
+14. jalankan server
+```bash
+php artisan serve
+```
+---
+    
+16. jalankan di web browser
+```bash
+travela.test
+```
+---
+   
 
 
