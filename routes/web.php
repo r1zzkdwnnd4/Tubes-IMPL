@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\PaymentController;
 use App\Http\Controllers\Auth\WisataKatalogController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\CustomerHistoryController;
+use App\Http\Controllers\Auth\AgenPesananController;
+
 
 // ADMIN
 use App\Http\Controllers\Auth\AdminAuthController;
@@ -238,4 +240,10 @@ Route::middleware('auth:agen')->group(function () {
         
     Route::get('/agen/riwayat', [AgenRiwayatController::class, 'index'])
         ->name('agen.riwayat');
+
+    Route::get('/agen/pesanan', [AgenPesananController::class, 'index'])
+        ->name('agen.pesanan');
+
+    Route::post('/agen/pesanan/{id}/status', [AgenPesananController::class, 'updateStatus'])
+        ->name('agen.pesanan.updateStatus');
 });

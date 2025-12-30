@@ -20,24 +20,24 @@
 
             <li class="nav-item">
                 <a class="nav-link rounded
-                {{ request()->routeIs('agen.dashboard') ? 'bg-success text-white' : 'text-dark' }}"
-                href="{{ route('agen.dashboard') }}">
+                <?php echo e(request()->routeIs('agen.dashboard') ? 'bg-success text-white' : 'text-dark'); ?>"
+                href="<?php echo e(route('agen.dashboard')); ?>">
                     Dashboard
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link rounded
-                {{ request()->routeIs('agen.paket') ? 'bg-success text-white' : 'text-dark' }}"
-                href="{{ route('agen.paket') }}">
+                <?php echo e(request()->routeIs('agen.paket') ? 'bg-success text-white' : 'text-dark'); ?>"
+                href="<?php echo e(route('agen.paket')); ?>">
                     Daftar Paket Wisata
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link rounded
-                {{ request()->routeIs('agen.riwayat') ? 'bg-success text-white' : 'text-dark' }}"
-                href="{{ route('agen.riwayat') }}">
+                <?php echo e(request()->routeIs('agen.riwayat') ? 'bg-success text-white' : 'text-dark'); ?>"
+                href="<?php echo e(route('agen.riwayat')); ?>">
                     Riwayat Pemesanan
                 </a>
             </li>
@@ -45,8 +45,8 @@
         </ul>
 
 
-        <form method="POST" action="{{ route('agen.logout') }}" class="mt-auto">
-            @csrf
+        <form method="POST" action="<?php echo e(route('agen.logout')); ?>" class="mt-auto">
+            <?php echo csrf_field(); ?>
             <button class="btn btn-outline-danger w-100 mt-4">
                 Logout (Agen)
             </button>
@@ -55,10 +55,10 @@
 
     <!-- CONTENT -->
     <main class="flex-fill p-5">
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
 
 </div>
 
 </body>
-</html>
+</html><?php /**PATH C:\laragon\www\travela\resources\views/pages/agenLayout.blade.php ENDPATH**/ ?>

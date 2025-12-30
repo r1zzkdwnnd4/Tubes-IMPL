@@ -50,7 +50,7 @@ class BookingController extends Controller
             'Tanggal_Travel'    => $request->Tanggal,
             'Metode_Pembayaran' => $request->MetodePembayaran,
             'Total'             => $total,
-            'Status'            => 'Menunggu Pembayaran',
+            'Status'            => 'Pending',
             'Kode_Booking'      => 'TRV-' . strtoupper(uniqid()),
         ]);
 
